@@ -644,7 +644,7 @@ body {
   top: 8rem;
   left: 57%;
   background-color: #fff;
-  width: 35rem;
+  width: 38rem;
 }
 
 .follow-heading {
@@ -672,11 +672,17 @@ body {
   object-fit: cover;
   border-radius: 50%;
 }
+.follow-user-info {
+  margin-right: 24px;
+}
+
 
 .follow-user-info h4,
 .follow-user-info p {
   font-size: 1.6rem;
   margin-bottom: 0.5rem;
+  overflow: hidden;
+  width: 160px;
 }
 
 .follow-btn {
@@ -689,6 +695,11 @@ body {
   border-radius: 2rem;
   font-size: 1.6rem;
   cursor: pointer;
+}
+
+.follow-btn:hover {
+  background-color: #1aa1f5;
+  color: #fff;
 }
 
 .follow-link {
@@ -791,7 +802,10 @@ body {
   border: 0.1rem solid #1aa1f5;
   border-radius: 3rem;
   opacity: 0.5;
+  cursor: pointer;
 }
+
+
 
 .modal-body {
   display: flex;
