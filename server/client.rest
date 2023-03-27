@@ -1,0 +1,3 @@
+## get inital values
+
+GET http://localhost:3001
