@@ -1,533 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no"
-    />
-    <title>Twitter-Clone</title>
-    <link rel="shortcut icon" href="images/8twitter.png" type="image/x-icon" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/93146aa192.js" crossorigin="anonymous"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- main-page -->
-    <section class="main-page">
-      <!-- left -->
-      <div class="left">
-        <div class="left-content">
-          <div>
-            <i class="fas fa-search"></i>
-            <h3 class="left-content-heading">Find Your Intrests</h3>
-          </div>
-          <div>
-            <i class="fas fa-user-friends"></i>
-            <h3 class="left-content-heading">
-              Explore what people are talking about
-            </h3>
-          </div>
-          <div>
-            <i class="fas fa-comment"></i>
-            <h3 class="left-content-heading">Join the people</h3>
-          </div>
-        </div>
-      </div>
-      <!-- end of left -->
-      <div class="right">
-        <div class="right-content">
-          <form class="right-content-form">
-            <input
-              type="text"
-              class="user-info"
-              placeholder="Phone, email, or username"
-            />
-            <div>
-              <input type="password" class="password" placeholder="Password" />
-              <label>Forgot Password?</label>
-            </div>
-            <button type="button" class="btn-top">Log In</button>
-          </form>
-          <div class="middle-content">
-            <i class="fas fa-dove"></i>
-            <h1>Explore what's happening in the world</h1>
-            <h4>Join Twitter today</h4>
-            <button type="button" class="sign-up main-btn">Sign-Up</button>
-            <button type="button" class="log-in main-btn">Log-In</button>
-          </div>
-        </div>
-      </div>
 
-      <!-- Footer -->
-      <footer class="main-page-footer">
-        <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Help</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">Apps</a></li>
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Status</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Brand</a></li>
-          <li><a href="#">Developers</a></li>
-          <li><a href="#">&copy; 2022 Twitter-Clone</a></li>
-        </ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Twitter-Clone</title>
+  <link rel="shortcut icon" href="images/8twitter.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://kit.fontawesome.com/93146aa192.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- main-page -->
+  <section class="main-page">
+    <!-- left -->
+    <div class="left">
+      <div class="left-content">
+        <div>
+          <i class="fas fa-search"></i>
+          <h3 class="left-content-heading">Find Your Intrests</h3>
+        </div>
+        <div>
+          <i class="fas fa-user-friends"></i>
+          <h3 class="left-content-heading">
+            Explore what people are talking about
+          </h3>
+        </div>
+        <div>
+          <i class="fas fa-comment"></i>
+          <h3 class="left-content-heading">Join the people</h3>
+        </div>
+      </div>
+    </div>
+    <!-- end of left -->
+    <div class="right">
+      <div class="right-content">
+        <form class="right-content-form">
+          <input type="text" class="user-info" placeholder="Phone, email, or username" />
+          <div>
+            <input type="password" class="password" placeholder="Password" />
+            <label>Forgot Password?</label>
+          </div>
+          <button type="button" class="btn-top">Log In</button>
+        </form>
+        <div class="middle-content">
+          <i class="fas fa-dove"></i>
+          <h1>Explore what's happening in the world</h1>
+          <h4>Join Twitter today</h4>
+          <button type="button" class="sign-up main-btn">Sign-Up</button>
+          <button type="button" class="log-in main-btn">Log-In</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-page-footer">
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Apps</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Status</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Brand</a></li>
+        <li><a href="#">Developers</a></li>
+        <li><a href="#">&copy; 2022 Twitter-Clone</a></li>
+      </ul>
+    </footer>
+  </section>
+
+  <!-- End of Main Page -->
+
+  <!-- Login Page -->
+
+  <section class="login-page">
+    <nav class="login-page-nav">
+      <ul>
+        <li class="brand">
+          <a href="#"> <i class="fas fa-dove"></i> Home </a>
+        </li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Language: English</a></li>
+      </ul>
+    </nav>
+
+    <div class="login">
+      <div class="login-content">
+        <h2>Log In To Twitter</h2>
+        <form class="login-form">
+          <input type="text" class="login-user-info" placeholder="Phone, Email, or Username" />
+          <input type="password" class="login-password" placeholder="Password" />
+
+          <div>
+            <button type="button" class="login-form-btn">Log In</button>
+            <input type="checkbox" class="login-form-checkbox" id="check" />
+            <label for="check">Remember Me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+        </form>
+      </div>
+      <footer class="login-footer">
+        <p>New To Twitter? <a href="#">Sign Up Now</a></p>
+        <p>
+          Already using Twitter via text message?
+          <a href="#">Activate your account </a>
+        </p>
       </footer>
-    </section>
+    </div>
 
-    <!-- End of Main Page -->
+    <!-- Login Modal -->
 
-    <!-- Login Page -->
+    <div class="login-modal">
+      <i class="fas fa-times"></i>
+      <p>
+        The username and password you entered did not match our records.
+        Please double check and try again.
+      </p>
+    </div>
 
-    <section class="login-page">
-      <nav class="login-page-nav">
-        <ul>
-          <li class="brand">
-            <a href="#"> <i class="fas fa-dove"></i> Home </a>
-          </li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Language: English</a></li>
-        </ul>
-      </nav>
+    <!-- End Of Login Modal -->
+  </section>
 
-      <div class="login">
-        <div class="login-content">
-          <h2>Log In To Twitter</h2>
-          <form class="login-form">
-            <input
-              type="text"
-              class="login-user-info"
-              placeholder="Phone, Email, or Username"
-            />
-            <input
-              type="password"
-              class="login-password"
-              placeholder="Password"
-            />
+  <!-- End Of Login Page -->
 
-            <div>
-              <button type="button" class="login-form-btn">Log In</button>
-              <input type="checkbox" class="login-form-checkbox" id="check" />
-              <label for="check">Remember Me</label>
-              <a href="#">Forgot Password?</a>
-            </div>
-          </form>
+  <!-- News-Feed-Page -->
+
+  <section class="feeds-page">
+    <nav class="feeds-nav dark-mode-1">
+      <div class="icons">
+        <a href="#" class="active"><i class="fas fa-home"></i></a>
+        <a href=""><i class="fas fa-hashtag"></i></a>
+        <a href=""><i class="far fa-bell"></i></a>
+        <a href=""><i class="far fa-envelope"></i></a>
+      </div>
+
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search Twitter" class="search-bar-input dark-mode-2 light-text border" />
+      </div>
+
+      <div class="user">
+        <div class="user-img-wrapper">
+          <img src="images/user1.jpg" alt="" />
         </div>
-        <footer class="login-footer">
-          <p>New To Twitter? <a href="#">Sign Up Now</a></p>
-          <p>
-            Already using Twitter via text message?
-            <a href="#">Activate your account </a>
-          </p>
+        <a href="#" class="user-link light-text">Dang Hoang Ha</a>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </nav>
+
+    <div class="feeds-content dark-mode-2">
+      <div class="feeds-header dark-mode-1">
+        <div class="header-top border">
+          <h4 class="light-text">Home</h4>
+          <i class="far fa-star"></i>
+        </div>
+
+        <div class="header-post dark-mode-1 border">
+          <div class="header-img-wrapper">
+            <img src="images/user1.jpg" />
+          </div>
+          <input type="text" placeholder="What's happening?" class="dark-mode-2 light-text border" />
+          <i class="far fa-image"></i>
+          <i class="fas fa-camera"></i>
+          <i class="far fa-chart-bar"></i>
+        </div>
+      </div>
+
+      <div class="posts dark-mode-1">
+        <div class="post border">
+          <div class="user-avatar">
+            <img src="images/user2.jpg" />
+          </div>
+          <div class="post-content">
+            <div class="post-user-info light-text">
+              <h4>Fabrizio Romano</h4>
+              <i class="fas fa-check-circle"></i>
+              <span>@FabrizioRomano . 15m</span>
+            </div>
+            <p class="post-text light-text">
+              Sergio Agüero on Messi and Barça again: “If president Laporta makes the step, I think Messi’s return to
+              Barcelona will come closer”. 🇦🇷 #FCB
+
+              <br>
+              <br>
+              Messi has completed 800 career goals last night by scoring vs Panama…
+
+              …and has no full agreement with PSG on new deal, at this stage.
+            </p>
+            <div class="post-img">
+              <img src="images/post-img-1.jpg" alt="post" />
+            </div>
+            <div class="content__action">
+              <span class="comment">
+                <i class="far fa-comment"></i>
+                <span class="comment-number">1.8K</span>
+              </span>
+              <span class="retweet">
+                <i class="fas fa-retweet"></i></i>
+                <span class="retweet-number">16.8K</span>
+              </span>
+              <span class="favorite">
+                <i class="far fa-heart"></i>
+                <span class="favorite-number">84.5K</span>
+              </span>
+              <span class="external-link">
+                <i class='bx bx-link-external'></i>
+                <span class="share">Share</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="post border">
+          <div class="user-avatar">
+            <img src="images/user3.jpg" />
+          </div>
+          <div class="post-content">
+            <div class="post-user-info light-text">
+              <h4>Sasha</h4>
+              <i class="fas fa-check-circle"></i>
+              <span>@S1mpleO . 45m</span>
+            </div>
+            <p class="post-text light-text">
+              Thanks, stream?
+            </p>
+            <div class="post-img">
+              <img src="images/post-img-2.jpg" alt="post" />
+            </div>
+            <div class="content__action">
+              <span class="comment">
+                <i class="far fa-comment"></i>
+                <span class="comment-number">161</span>
+              </span>
+              <span class="retweet">
+                <i class="fas fa-retweet"></i></i>
+                <span class="retweet-number">365</span>
+              </span>
+              <span class="favorite">
+                <i class="far fa-heart"></i>
+                <span class="favorite-number">19.5K</span>
+              </span>
+              <span class="external-link">
+                <i class='bx bx-link-external'></i>
+                <span class="share">Share</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="post border">
+          <div class="user-avatar">
+            <img src="images/user4.jpg" />
+          </div>
+          <div class="post-content">
+            <div class="post-user-info light-text">
+              <h4>Jack Thịnh Phan</h4>
+              <span>@Zackie . Dec 19, 2022</span>
+            </div>
+            <p class="post-text light-text">
+              ғɪɴʟᴀɴᴅ's ᴡɪɴᴛᴇʀ ɪs ғʀᴇᴇᴢɪɴɢ ᴄᴏʟᴅ
+              <br>
+              ʙɪʀᴛʜᴅᴀʏ ɢɪғᴛ ɪs ᴏɴʟʏ sɴᴏᴡ ツ
+            </p>
+            <div class="post-img">
+
+
+              <img src="images/post-img-3.jpg" alt="post" />
+
+
+            </div>
+            <div class="content__action">
+              <span class="comment">
+                <i class="far fa-comment"></i>
+                <span class="comment-number">12</span>
+              </span>
+              <span class="retweet">
+                <i class="fas fa-retweet"></i></i>
+                <span class="retweet-number">0</span>
+              </span>
+              <span class="favorite">
+                <i class="far fa-heart"></i>
+                <span class="favorite-number">28</span>
+              </span>
+              <span class="external-link">
+                <i class='bx bx-link-external'></i>
+                <span class="share">Share</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="post border">
+          <div class="user-avatar">
+            <img src="images/user5.jpg" />
+          </div>
+          <div class="post-content">
+            <div class="post-user-info light-text">
+              <h4>CS2</h4>
+              <i class="fas fa-check-circle"></i>
+              <span>@CounterStrike . 1h 4m</span>
+            </div>
+            <p class="post-text light-text">
+              The Paris Major will be the final CS:GO Major.
+              <br>
+              <br>
+              The following Major will be in March 2024 and the first in Counter-Strike 2.
+            </p>
+            <!-- <div class="post-img">
+                <img src="images/post-img-4.jpg" alt="post" />
+              </div> -->
+            <div></div>
+            <div class="content__action">
+              <span class="comment">
+                <i class="far fa-comment"></i>
+                <span class="comment-number">1.8K</span>
+              </span>
+              <span class="retweet">
+                <i class="fas fa-retweet"></i></i>
+                <span class="retweet-number">8.9K</span>
+              </span>
+              <span class="favorite">
+                <i class="far fa-heart"></i>
+                <span class="favorite-number">113.7K</span>
+              </span>
+              <span class="external-link">
+                <i class='bx bx-link-external'></i>
+                <span class="share">Share</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="follow dark-mode-1">
+        <h3 class="follow-heading light-text border">Who to follow</h3>
+        <div class="follow-user border">
+          <div class="follow-user-img">
+            <img src="images/user5.jpg" />
+          </div>
+          <div class="follow-user-info light-text">
+            <h4>CS2 <i class="fas fa-check-circle"></i></h4>
+            <p>@CounterStrike</p>
+          </div>
+          <button type="button" class="follow-btn dark-mode-2">Follow</button>
+        </div>
+        <div class="follow-user border">
+          <div class="follow-user-img">
+            <img src="images/user4.jpg" />
+          </div>
+          <div class="follow-user-info light-text">
+            <h4>Jack Thịnh Phan</h4>
+            <p>@Zackie</p>
+          </div>
+          <button type="button" class="follow-btn dark-mode-2">Follow</button>
+        </div>
+        <div class="follow-user border">
+          <div class="follow-user-img">
+            <img src="images/user3.jpg" />
+          </div>
+          <div class="follow-user-info light-text">
+            <h4>Sasha <i class="fas fa-check-circle"></i></h4>
+            <p>@S1pmleO</p>
+          </div>
+          <button type="button" class="follow-btn dark-mode-2">Follow</button>
+        </div>
+        <div class="follow-user border">
+          <div class="follow-user-img">
+            <img src="images/user2.jpg" />
+          </div>
+          <div class="follow-user-info light-text">
+            <h4>Fabrizio Romano <i class="fas fa-check-circle"></i></h4>
+            <p>@FabrizioRomano</p>
+          </div>
+          <button type="button" class="follow-btn dark-mode-2">Follow</button>
+        </div>
+        <div class="follow-link">
+          <a href="#">Show more</a>
+        </div>
+        <footer class="follow-footer dark-mode-2">
+          <ul>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">More</a></li>
+          </ul>
         </footer>
       </div>
+    </div>
 
-      <!-- Login Modal -->
+    <!-- Post Button -->
+    <button type="button" class="post-btn">
+      +<i class="fas fa-feather-alt"></i> Post
+    </button>
 
-      <div class="login-modal">
-        <i class="fas fa-times"></i>
-        <p>
-          The username and password you entered did not match our records.
-          Please double check and try again.
-        </p>
-      </div>
+    <!-- Post-Modal -->
 
-      <!-- End Of Login Modal -->
-    </section>
-
-    <!-- End Of Login Page -->
-
-    <!-- News-Feed-Page -->
-
-    <section class="feeds-page">
-      <nav class="feeds-nav dark-mode-1">
-        <div class="icons">
-          <a href="#" class="active"><i class="fas fa-home"></i></a>
-          <a href=""><i class="fas fa-hashtag"></i></a>
-          <a href=""><i class="far fa-bell"></i></a>
-          <a href=""><i class="far fa-envelope"></i></a>
+    <div class="modal-wrapper">
+      <div class="modal dark-mode-1">
+        <div class="modal-header border">
+          <i class="fas fa-times"></i>
+          <button type="button">Post</button>
         </div>
-
-        <div class="search-bar">
-          <i class="fas fa-search"></i>
-          <input
-            type="text"
-            placeholder="Search Twitter"
-            class="search-bar-input dark-mode-2 light-text border"
-          />
-        </div>
-
-        <div class="user">
-          <div class="user-img-wrapper">
-            <img src="images/user1.jpg" alt="" />
+        <div class="modal-body">
+          <div class="modal-img">
+            <img src="images/user1.jpg" />
           </div>
-          <a href="#" class="user-link light-text">Dang Hoang Ha</a>
-          <i class="fas fa-chevron-down"></i>
+          <input type="text" placeholder="What's happening ?" class="modal-input dark-mode-2 light-text border" />
+          <i class="far fa-smile"></i>
         </div>
-      </nav>
-
-      <div class="feeds-content dark-mode-2">
-        <div class="feeds-header dark-mode-1">
-          <div class="header-top border">
-            <h4 class="light-text">Home</h4>
-            <i class="far fa-star"></i>
-          </div>
-
-          <div class="header-post dark-mode-1 border">
-            <div class="header-img-wrapper">
-              <img src="images/user1.jpg" />
-            </div>
-            <input
-              type="text"
-              placeholder="What's happening?"
-              class="dark-mode-2 light-text border"
-            />
+        <div class="modal-footer">
+          <div class="modal-icons">
             <i class="far fa-image"></i>
             <i class="fas fa-camera"></i>
             <i class="far fa-chart-bar"></i>
-          </div>
-        </div>
-
-        <div class="posts dark-mode-1">
-          <div class="post border">
-            <div class="user-avatar">
-              <img src="images/user2.jpg" />
-            </div>
-            <div class="post-content">
-              <div class="post-user-info light-text">
-                <h4>Fabrizio Romano</h4>
-                <i class="fas fa-check-circle"></i>
-                <span>@FabrizioRomano . 15m</span>
-              </div>
-              <p class="post-text light-text">
-                Sergio Agüero on Messi and Barça again: “If president Laporta makes the step, I think Messi’s return to Barcelona will come closer”. 🇦🇷 #FCB
-
-                <br>
-                <br>
-                Messi has completed 800 career goals last night by scoring vs Panama…
-
-                …and has no full agreement with PSG on new deal, at this stage.
-              </p>
-              <div class="post-img">
-                <img src="images/post-img-1.jpg" alt="post" />
-              </div>
-              <div class="content__action">
-                <span class="comment">
-                    <i class="far fa-comment"></i> 
-                    <span class="comment-number">1.8K</span> 
-                </span>
-                <span class="retweet">
-                    <i class="fas fa-retweet"></i></i>
-                    <span class="retweet-number">16.8K</span> 
-                </span>
-                <span class="favorite">
-                    <i class="far fa-heart"></i>
-                    <span class="favorite-number">84.5K</span> 
-                </span>
-                <span class="external-link">
-                    <i class='bx bx-link-external'></i>
-                    <span class="share">Share</span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="post border">
-            <div class="user-avatar">
-              <img src="images/user3.jpg" />
-            </div>
-            <div class="post-content">
-              <div class="post-user-info light-text">
-                <h4>Sasha</h4>
-                <i class="fas fa-check-circle"></i>
-                <span>@S1mpleO . 45m</span>
-              </div>
-              <p class="post-text light-text">
-                Thanks, stream?
-              </p>
-              <div class="post-img">
-                <img src="images/post-img-2.jpg" alt="post" />
-              </div>
-              <div class="content__action">
-                <span class="comment">
-                    <i class="far fa-comment"></i> 
-                    <span class="comment-number">161</span> 
-                </span>
-                <span class="retweet">
-                    <i class="fas fa-retweet"></i></i>
-                    <span class="retweet-number">365</span> 
-                </span>
-                <span class="favorite">
-                    <i class="far fa-heart"></i>
-                    <span class="favorite-number">19.5K</span> 
-                </span>
-                <span class="external-link">
-                    <i class='bx bx-link-external'></i>
-                    <span class="share">Share</span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="post border">
-            <div class="user-avatar">
-              <img src="images/user4.jpg" />
-            </div>
-            <div class="post-content">
-              <div class="post-user-info light-text">
-                <h4>Jack Thịnh Phan</h4>
-                <span>@Zackie . Dec 19, 2022</span>
-              </div>
-              <p class="post-text light-text">
-                ғɪɴʟᴀɴᴅ's ᴡɪɴᴛᴇʀ ɪs ғʀᴇᴇᴢɪɴɢ ᴄᴏʟᴅ
-                <br>
-                ʙɪʀᴛʜᴅᴀʏ ɢɪғᴛ ɪs ᴏɴʟʏ sɴᴏᴡ ツ
-              </p>
-              <div class="post-img">
-                
-
-                  <img src="images/post-img-3.jpg" alt="post" />
-                  
-                
-              </div>
-              <div class="content__action">
-                <span class="comment">
-                    <i class="far fa-comment"></i> 
-                    <span class="comment-number">12</span> 
-                </span>
-                <span class="retweet">
-                    <i class="fas fa-retweet"></i></i>
-                    <span class="retweet-number">0</span> 
-                </span>
-                <span class="favorite">
-                    <i class="far fa-heart"></i>
-                    <span class="favorite-number">28</span> 
-                </span>
-                <span class="external-link">
-                    <i class='bx bx-link-external'></i>
-                    <span class="share">Share</span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="post border">
-            <div class="user-avatar">
-              <img src="images/user5.jpg" />
-            </div>
-            <div class="post-content">
-              <div class="post-user-info light-text">
-                <h4>CS2</h4>
-                <i class="fas fa-check-circle"></i>
-                <span>@CounterStrike . 1h 4m</span>
-              </div>
-              <p class="post-text light-text">
-                The Paris Major will be the final CS:GO Major. 
-                <br>
-                <br> 
-                The following Major will be in March 2024 and the first in Counter-Strike 2.
-              </p>
-              <!-- <div class="post-img">
-                <img src="images/post-img-4.jpg" alt="post" />
-              </div> -->
-              <div></div>
-              <div class="content__action">
-                <span class="comment">
-                    <i class="far fa-comment"></i> 
-                    <span class="comment-number">1.8K</span> 
-                </span>
-                <span class="retweet">
-                    <i class="fas fa-retweet"></i></i>
-                    <span class="retweet-number">8.9K</span> 
-                </span>
-                <span class="favorite">
-                    <i class="far fa-heart"></i>
-                    <span class="favorite-number">113.7K</span> 
-                </span>
-                <span class="external-link">
-                    <i class='bx bx-link-external'></i>
-                    <span class="share">Share</span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          
-          
-        </div>
-
-        <div class="follow dark-mode-1">
-          <h3 class="follow-heading light-text border">Who to follow</h3>
-          <div class="follow-user border">
-            <div class="follow-user-img">
-              <img src="images/user5.jpg" />
-            </div>
-            <div class="follow-user-info light-text">
-              <h4>CS2 <i class="fas fa-check-circle"></i></h4>
-              <p>@CounterStrike</p>
-            </div>
-            <button type="button" class="follow-btn dark-mode-2">Follow</button>
-          </div>
-          <div class="follow-user border">
-            <div class="follow-user-img">
-              <img src="images/user4.jpg" />
-            </div>
-            <div class="follow-user-info light-text">
-              <h4>Jack Thịnh Phan</h4>
-              <p>@Zackie</p>
-            </div>
-            <button type="button" class="follow-btn dark-mode-2">Follow</button>
-          </div>
-          <div class="follow-user border">
-            <div class="follow-user-img">
-              <img src="images/user3.jpg" />
-            </div>
-            <div class="follow-user-info light-text">
-              <h4>Sasha <i class="fas fa-check-circle"></i></h4>
-              <p>@S1pmleO</p>
-            </div>
-            <button type="button" class="follow-btn dark-mode-2">Follow</button>
-          </div>
-          <div class="follow-user border">
-            <div class="follow-user-img">
-              <img src="images/user2.jpg" />
-            </div>
-            <div class="follow-user-info light-text">
-              <h4>Fabrizio Romano <i class="fas fa-check-circle"></i></h4>
-              <p>@FabrizioRomano</p>
-            </div>
-            <button type="button" class="follow-btn dark-mode-2">Follow</button>
-          </div>
-          <div class="follow-link">
-            <a href="#">Show more</a>
-          </div>
-          <footer class="follow-footer dark-mode-2">
-            <ul>
-              <li><a href="#">Terms</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Cookies</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">More</a></li>
-            </ul>
-          </footer>
-        </div>
-      </div>
-
-      <!-- Post Button -->
-      <button type="button" class="post-btn">
-        +<i class="fas fa-feather-alt"></i> Post
-      </button>
-
-      <!-- Post-Modal -->
-
-      <div class="modal-wrapper">
-        <div class="modal dark-mode-1">
-          <div class="modal-header border">
-            <i class="fas fa-times"></i>
-            <button type="button">Post</button>
-          </div>
-          <div class="modal-body">
-            <div class="modal-img">
-              <img src="images/user1.jpg" />
-            </div>
-            <input
-              type="text"
-              placeholder="What's happening ?"
-              class="modal-input dark-mode-2 light-text border"
-            />
-            <i class="far fa-smile"></i>
-          </div>
-          <div class="modal-footer">
-            <div class="modal-icons">
-              <i class="far fa-image"></i>
-              <i class="fas fa-camera"></i>
-              <i class="far fa-chart-bar"></i>
-              <span>+</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar -->
-
-      <div class="sidebar-wrapper">
-        <div class="sidebar dark-mode-1">
-          <div class="sidebar-header border">
-            <h2 class="light-text">Account Info</h2>
-            <i class="fas fa-times"></i>
-          </div>
-          <div class="sidebar-user">
-            <div class="sidebar-user-img">
-              <img src="images/user1.jpg" />
-            </div>
             <span>+</span>
           </div>
-          <div class="sidebar-user-info light-text">
-            <h4>Dang Hoang Ha</h4>
-            <p>@hha.2907</p>
-          </div>
-          <div class="following light-text">
-            <p class="following-paragraph"><span>811</span> Following</p>
-            <p class="following-paragraph"><span>8.8K</span> Followers</p>
-          </div>
-          <div class="sidebar-list-1 border">
-            <ul>
-              <li>
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
-              </li>
-              <li>
-                <a href="#"><i class="far fa-list-alt"></i> Lists</a>
-              </li>
-              <li>
-                <a href="#"><i class="far fa-bookmark"></i> Bookmarks</a>
-              </li>
-              <li>
-                <a href="#"><i class="fab fa-adversal"></i> Ads</a>
-              </li>
-              <li>
-                <a href="#"><i class="fas fa-chart-line"></i> Analytics</a>
-              </li>
-            </ul>
-          </div>
-          <div class="sidebar-list-2">
-            <ul>
-              <li><a href="#">Settings and Privacy</a></li>
-              <li><a href="#">Help Center</a></li>
-              <li><a href="#">Log Out</a></li>
-            </ul>
-          </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- Dark Mode -->
+    <!-- Sidebar -->
 
-          <div class="dark-mode">
-            <p>Dark Mode</p>
-            <div class="toggle">
-              <div class="circle"></div>
-            </div>
+    <div class="sidebar-wrapper">
+      <div class="sidebar dark-mode-1">
+        <div class="sidebar-header border">
+          <h2 class="light-text">Account Info</h2>
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="sidebar-user">
+          <div class="sidebar-user-img">
+            <img src="images/user1.jpg" />
+          </div>
+          <span>+</span>
+        </div>
+        <div class="sidebar-user-info light-text">
+          <h4>Dang Hoang Ha</h4>
+          <p>@hha.2907</p>
+        </div>
+        <div class="following light-text">
+          <p class="following-paragraph"><span>811</span> Following</p>
+          <p class="following-paragraph"><span>8.8K</span> Followers</p>
+        </div>
+        <div class="sidebar-list-1 border">
+          <ul>
+            <li>
+              <a href="#"><i class="fas fa-user"></i> Profile</a>
+            </li>
+            <li>
+              <a href="#"><i class="far fa-list-alt"></i> Lists</a>
+            </li>
+            <li>
+              <a href="#"><i class="far fa-bookmark"></i> Bookmarks</a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-adversal"></i> Ads</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-chart-line"></i> Analytics</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sidebar-list-2">
+          <ul>
+            <li><a href="#">Settings and Privacy</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Log Out</a></li>
+          </ul>
+        </div>
+
+        <!-- Dark Mode -->
+
+        <div class="dark-mode">
+          <p>Dark Mode</p>
+          <div class="toggle">
+            <div class="circle"></div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- End of Sidebar -->
-    </section>
+    <!-- End of Sidebar -->
+  </section>
 
-    <!-- End News-Feed-Page -->
+  <!-- End News-Feed-Page -->
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
+
 </html>
