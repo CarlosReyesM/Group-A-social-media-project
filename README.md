@@ -25,3 +25,5 @@ Make sure that you postgres database is running.
 On VS Code install the extension `Rest client`.
 
 Go to `client.rest` and test the GET api.
+
+Carlos test
