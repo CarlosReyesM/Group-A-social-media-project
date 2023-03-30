@@ -11,7 +11,7 @@ host: `localhost`
 port: 5432 // this is default postgres port
 
 create new database with name `twitter`
-open query tool in the database and run `db.sql` content
+open query tool in the database and run `001_db.sql` content and all the other migrations files in order.
 
 # Initialize server
 
