@@ -1,3 +1,13 @@
-## get inital values
+### get inital values
 
-GET http://localhost:3001
+GET http://localhost:3001/tweets
+
+### post new tweet
+
+POST http://localhost:3001/tweets
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "tweet": "test content"
+}
