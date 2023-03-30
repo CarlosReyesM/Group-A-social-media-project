@@ -1,10 +1,11 @@
 # Group-A-social-media-project
+
 OAMK project for social media app
 
 # Create Local Database.
 
 Download and install postgresQL
-For local server set: 
+For local server set:
 password: `postgrespw`
 User: `postgres`
 host: `localhost`
@@ -25,3 +26,4 @@ Make sure that you postgres database is running.
 On VS Code install the extension `Rest client`.
 
 Go to `client.rest` and test the GET api.
+Galib Test
