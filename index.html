@@ -13,6 +13,7 @@
   <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
   <script src="https://kit.fontawesome.com/93146aa192.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -43,8 +44,13 @@
       <div class="right-content">
         <form class="right-content-form">
           <input type="text" class="user-info" placeholder="Phone, email, or username" />
-          <div>
-            <input type="password" class="password" placeholder="Password" />
+          <div class="password-container">
+            
+            <div class="eye-btn">
+              <input type="password" name="password" id="password" placeholder="Enter your password"/>
+              <i class="fa fa-eye-slash  password-toggle"></i>
+            </div>
+            
             <label>Forgot Password?</label>
           </div>
           <button type="button" class="btn-top">Log In</button>
@@ -53,8 +59,16 @@
           <i class="fas fa-dove"></i>
           <h1>Explore what's happening in the world</h1>
           <h4>Join Twitter today</h4>
+          
           <button type="button" class="sign-up main-btn">Sign-Up</button>
           <button type="button" class="log-in main-btn">Log-In</button>
+          <h5 class="or">Or</h5>
+          
+            <button id="google-button" class="google main-btn">Login with Google</button>
+          
+          
+            
+        </div>
         </div>
       </div>
     </div>
@@ -98,7 +112,11 @@
         <h2>Log In To Twitter</h2>
         <form class="login-form">
           <input type="text" class="login-user-info" placeholder="Phone, Email, or Username" />
-          <input type="password" class="login-password" placeholder="Password" />
+          <div>
+            <input type="password" class="login-password" placeholder="Password">
+
+          </div>
+          
 
           <div>
             <button type="button" class="login-form-btn">Log In</button>
@@ -131,6 +149,9 @@
   </section>
 
   <!-- End Of Login Page -->
+
+
+ 
 
   <!-- News-Feed-Page -->
 

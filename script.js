@@ -20,9 +20,19 @@ const sidebarWrapper = document.querySelector(".sidebar-wrapper");
 const xBtn = document.querySelector(".sidebar-header i");
 const toggle = document.querySelector(".toggle");
 const circle = document.querySelector(".circle");
+const passwordInput = document.getElementById('password'); 
+const passwordToggle = document.querySelector('.password-toggle');
+
+  
 
 /************************************************************ */
 //Main Page
+
+passwordToggle.addEventListener('click', function() {
+  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+  passwordToggle.classList.toggle('fa-eye');
+});
 
 const goToLoginPage = () => {
   mainPage.style.display = "none";
@@ -65,6 +75,7 @@ loginFormBtn.addEventListener("click", () => {
     loginModal.style.display = "block";
   }
 });
+
 
 // News Feed Page
 // Post modal
