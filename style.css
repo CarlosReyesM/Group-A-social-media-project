@@ -41,6 +41,17 @@ body {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr min-content;
 }
+.password-container {
+  position: relative;
+}
+
+.eye-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: medium;
+}
 
 /* left */
 .left {
@@ -183,6 +194,26 @@ body {
 .log-in:hover {
   background-color: #d9ebf7;
 }
+ .or{
+  font-size: 15px;
+  color: black;
+  text-align:center
+ }
+ .google {
+  background-color: #1aa1f5;
+  color: #fff;
+  
+  
+ }
+ .google a{
+  color: #fff;
+  
+ }
+ .google:hover {
+  background-color: #0f5d8d;
+}
+
+
 
 /* footer */
 
@@ -288,6 +319,20 @@ body {
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
 }
 
+.fa-eye-slash {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #8b8b8b;
+  cursor: pointer;
+  padding: 8px;
+}
+
+
+
+
 .login-content {
   grid-column: 2 / -1;
   grid-row: 1 / 2;
@@ -303,6 +348,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 
 .login-form input:not(.login-form-checkbox) {
   width: 30rem;
