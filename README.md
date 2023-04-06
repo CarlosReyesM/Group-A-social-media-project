@@ -27,3 +27,5 @@ On VS Code install the extension `Rest client`.
 
 Go to `client.rest` and test the GET api.
 Galib Test
+              <i class="fas fa-eye password-toggle" ></i>
+              fa-eye-slash
