@@ -6,12 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.tweetsRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const database_1 = require("../database");
+const formatDistance_1 = __importDefault(require("date-fns/formatDistance"));
 exports.tweetsRouter = express_1.default.Router();
 const parsePosts = (posts) => {
     return {
         author: posts.name,
         nametag: posts.name_tag || posts.name,
-        time: posts.timestamp || new Date().toString(),
+        time: (0, formatDistance_1.default)(posts.timestamp ? new Date(posts.timestamp) : new Date(), new Date()),
         content: posts.content,
         image: posts.image_address || "",
         commentNumber: posts.comments_count,

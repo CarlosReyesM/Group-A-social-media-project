@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import { openDb } from "../database";
 import { QueryResult } from "pg";
 import { Post, QueryPosts } from "../models/posts";
+import formatDistance from 'date-fns/formatDistance';
 
 export const tweetsRouter = express.Router();
 
@@ -9,7 +10,7 @@ const parsePosts = (posts: QueryPosts): Post => {
   return {
     author: posts.name,
     nametag: posts.name_tag || posts.name,
-    time: posts.timestamp || new Date().toString(),
+    time: formatDistance(posts.timestamp ? new Date(posts.timestamp) : new Date(), new Date()),
     content: posts.content,
     image: posts.image_address || "",
     commentNumber: posts.comments_count,
