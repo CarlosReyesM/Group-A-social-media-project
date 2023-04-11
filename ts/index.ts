@@ -1,3 +1,5 @@
+// import {fetchStories} from "./fetchStories.js"
+
 //DOM Elements
 const mainPage = <HTMLElement>document.querySelector(".main-page");
 const loginPage = <HTMLElement>document.querySelector(".login-page");
@@ -50,9 +52,11 @@ btnTop.addEventListener("click", () => {
   const inputUserInfo = <HTMLInputElement>document.querySelector(".user-info");
   const inputPassword = <HTMLInputElement>document.querySelector("#password");
 
+  // TODO handle user authentication
   if (inputUserInfo.value !== "" && inputPassword.value !== "") {
     mainPage.style.display = "none";
     newsFeedPage.style.display = "block";
+    // fetchStories();
   } else {
     goToLoginPage();
     loginModal.style.display = "block";
@@ -70,8 +74,10 @@ loginFormBtn.addEventListener("click", () => {
   const loginPassword = <HTMLInputElement>document.querySelector(".login-password");
 
   if (loginUserInfo.value !== "" && loginPassword.value !== "") {
+  // TODO handle user authentication
     loginPage.style.display = "none";
     newsFeedPage.style.display = "block";
+    // fetchStories();
   } else {
     loginModal.style.display = "block";
   }
