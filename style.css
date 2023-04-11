@@ -120,6 +120,10 @@ body {
   font-weight: 300;
   color: #a7a6a6;
 }
+.right-content-form label:hover {
+  cursor: pointer;
+  color: #000000;
+}
 
 .btn-top {
   width: 8rem;
@@ -465,11 +469,23 @@ body {
   align-items: center;
 }
 
+.icons a:hover {
+  color: #1a91da;
+  background-color: #eeeeee;
+  border-radius: 16px;
+}
+
 .icons a {
   text-decoration: none;
-  margin-right: 7rem;
+  margin-right: 1.6rem;
   font-size: 2.5rem;
   color: #9e9a9a;
+  
+}
+
+.icons i {
+  padding: 8px 32px;
+  border-radius: 50%;
 }
 
 .icons .active {
@@ -483,8 +499,8 @@ body {
 }
 
 .search-bar-input {
-  width: 35rem;
-  height: 3rem;
+  width: 36rem;
+  height: 4rem;
   border: 0.1rem solid #d6e1e9;
   border-radius: 3rem;
   background-color: #d6e1e9;
@@ -566,6 +582,7 @@ body {
 .header-top i {
   font-size: 2rem;
   color: #1aa1f5;
+  cursor: pointer;
 }
 
 .header-post {
@@ -602,6 +619,7 @@ body {
   font-size: 2.5rem;
   color: #1aa1f5;
   margin: 1rem;
+  cursor: pointer;
 }
 
 .posts {
@@ -629,6 +647,11 @@ body {
   object-fit: cover;
   border-radius: 50%;
 }
+
+/* .posts:hover {
+  cursor: pointer;
+  background-color: #dcdcdc;
+} */
 
 .post-user-info {
   display: flex;
@@ -658,16 +681,18 @@ body {
 
 .post-img {
   display: flex;
+  overflow: hidden;
 }
 
-.post-divided {
+/* .post-divided {
   display: flex;
   flex-basis: calc(50%);
   flex-direction: row;
-}
+} */
 
 .post-img img {
-  max-width: 100%;
+  width: 480px;
+  height: 600px;
   object-fit: cover;
   border-radius: 1rem;
   margin-right: 4px;
@@ -690,7 +715,7 @@ body {
   top: 8rem;
   left: 57%;
   background-color: #fff;
-  width: 38rem;
+  width: 38.8rem;
 }
 
 .follow-heading {
@@ -728,7 +753,12 @@ body {
   font-size: 1.6rem;
   margin-bottom: 0.5rem;
   overflow: hidden;
-  width: 160px;
+  width: 164px;
+}
+
+.follow-user i {
+  color: #1aa1f5;
+  margin-left: 4px;
 }
 
 .follow-btn {
@@ -1075,10 +1105,10 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 80%;
+  width: 96%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   color: var(--text-color);
   padding: 2rem 0 0 0;
   font-size: 1.6rem;
@@ -1094,6 +1124,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin-right: 24px;
 }
 
 .content__action span i{
@@ -1396,6 +1427,7 @@ body {
 
   .login-form label {
     font-size: 1.4rem;
+    
   }
 
   .login-form a {
@@ -1549,4 +1581,9 @@ body {
   .post-btn {
     left: 60%;
   }
+}
+
+.pink {
+  color: #ff0051;
+  background-color: #ff0051;
 }
