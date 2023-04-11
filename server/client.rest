@@ -1,6 +1,6 @@
 ### get inital values
 
-GET http://localhost:3001/tweets
+GET http://localhost:3001/tweets/1
 
 ### post new tweet
 

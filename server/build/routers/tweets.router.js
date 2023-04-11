@@ -7,16 +7,43 @@ exports.tweetsRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const database_1 = require("../database");
 exports.tweetsRouter = express_1.default.Router();
+const parsePosts = (posts) => {
+    return {
+        author: posts.name,
+        nametag: posts.name_tag || posts.name,
+        time: posts.timestamp || new Date().toString(),
+        content: posts.content,
+        image: posts.image_address || "",
+        commentNumber: posts.comments_count,
+        retweetNumber: posts.retweets_count,
+        favoriteNumber: posts.favorites_count,
+    };
+};
 exports.tweetsRouter.use((req, res, next) => {
     next();
 });
-exports.tweetsRouter.get("/", (req, res) => {
+exports.tweetsRouter.get("/:id", (req, res) => {
+    const userId = req.params.id;
     const pool = (0, database_1.openDb)();
-    pool.query("select * from tweets", (error, result) => {
+    pool.query(`
+    SELECT 
+      t.content, 
+      t.timestamp, 
+      u.name, 
+      u.name_tag, 
+      i.address as image_address, 
+      (SELECT COUNT(*) FROM retweets WHERE retweets.tweet_id = t.id) AS retweets_count,
+      (SELECT COUNT(*) FROM comments WHERE comments.tweet_id = t.id) AS comments_count,
+      (SELECT COUNT(*) FROM favorites WHERE favorites.tweet_id = t.id) AS favorites_count
+      FROM tweets t
+      LEFT JOIN users u ON user_id = u.id
+      LEFT JOIN images i ON t.id = i.tweet_id
+      WHERE t.user_id = $1;
+  `, [userId], (error, result) => {
         if (error) {
             res.status(500).json({ error: error });
         }
-        res.status(200).json(result.rows);
+        res.status(200).json(result.rows.map((r) => parsePosts(r)));
     });
 });
 exports.tweetsRouter.post("/", (req, res) => {
