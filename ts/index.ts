@@ -1,4 +1,5 @@
-// import {fetchStories} from "./fetchStories.js"
+import Posts from "./classes/posts.js";
+import { Post } from "./interfaces/post.js";
 
 //DOM Elements
 const mainPage = <HTMLElement>document.querySelector(".main-page");
@@ -13,8 +14,12 @@ const postBtn = <HTMLElement>document.querySelector(".post-btn");
 const modalWrapper = <HTMLElement>document.querySelector(".modal-wrapper");
 const modal = <HTMLElement>document.querySelector(".modal");
 const postModalX = <HTMLElement>document.querySelector(".modal-header i");
-const modalPostBtn = <HTMLElement>document.querySelector(".modal-header button");
-const modalFooterPlus = <HTMLElement>document.querySelector(".modal-footer span");
+const modalPostBtn = <HTMLElement>(
+  document.querySelector(".modal-header button")
+);
+const modalFooterPlus = <HTMLElement>(
+  document.querySelector(".modal-footer span")
+);
 const modalInput = <HTMLInputElement>document.querySelector(".modal-input");
 const user = <HTMLElement>document.querySelector(".user");
 const sidebar = <HTMLElement>document.querySelector(".sidebar");
@@ -29,6 +34,7 @@ const postElement =  <HTMLElement>document.querySelector(".posts");
 
 
 
+const postsClass = new Posts();
 
 /************************************************************ */
 // POST
@@ -116,7 +122,6 @@ const renderPost = () => {
 };
 
 btnPost?.addEventListener("click", () => {
-
   const contentInputPost = inputPost.value;
   console.log(contentInputPost);
 
@@ -144,13 +149,13 @@ favoriteBtn?.addEventListener("click", () => {
   
 });
 
-
 //Main Page
 
-passwordToggle.addEventListener('click', function() {
-  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-  passwordInput.setAttribute('type', type);
-  passwordToggle.classList.toggle('fa-eye');
+passwordToggle.addEventListener("click", function () {
+  const type =
+    passwordInput.getAttribute("type") === "password" ? "text" : "password";
+  passwordInput.setAttribute("type", type);
+  passwordToggle.classList.toggle("fa-eye");
 });
 
 const goToLoginPage = () => {
@@ -165,15 +170,14 @@ middleContent.addEventListener("click", (e) => {
   }
 });
 
-btnTop.addEventListener("click", () => {
+btnTop.addEventListener("click", async () => {
   const inputUserInfo = <HTMLInputElement>document.querySelector(".user-info");
   const inputPassword = <HTMLInputElement>document.querySelector("#password");
 
-  // TODO handle user authentication
   if (inputUserInfo.value !== "" && inputPassword.value !== "") {
     mainPage.style.display = "none";
     newsFeedPage.style.display = "block";
-    // fetchStories();
+    postsClass.fetchPosts();
   } else {
     goToLoginPage();
     loginModal.style.display = "block";
@@ -187,19 +191,22 @@ modalX.addEventListener("click", () => {
 });
 
 loginFormBtn.addEventListener("click", () => {
-  const loginUserInfo = <HTMLInputElement>document.querySelector(".login-user-info");
-  const loginPassword = <HTMLInputElement>document.querySelector(".login-password");
+  const loginUserInfo = <HTMLInputElement>(
+    document.querySelector(".login-user-info")
+  );
+  const loginPassword = <HTMLInputElement>(
+    document.querySelector(".login-password")
+  );
 
   if (loginUserInfo.value !== "" && loginPassword.value !== "") {
-  // TODO handle user authentication
+    // TODO handle user authentication
     loginPage.style.display = "none";
     newsFeedPage.style.display = "block";
-    // fetchStories();
+    postsClass.fetchPosts();
   } else {
     loginModal.style.display = "block";
   }
 });
-
 
 // News Feed Page
 // Post modal
@@ -267,6 +274,3 @@ toggle.addEventListener("click", () => {
   );
   Array.from(borders).map((border) => border.classList.toggle("border-color"));
 });
-
-
-

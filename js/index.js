@@ -1,5 +1,13 @@
-"use strict";
-// import {fetchStories} from "./fetchStories.js"
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import Posts from "./classes/posts.js";
 //DOM Elements
 const mainPage = document.querySelector(".main-page");
 const loginPage = document.querySelector(".login-page");
@@ -13,8 +21,8 @@ const postBtn = document.querySelector(".post-btn");
 const modalWrapper = document.querySelector(".modal-wrapper");
 const modal = document.querySelector(".modal");
 const postModalX = document.querySelector(".modal-header i");
-const modalPostBtn = document.querySelector(".modal-header button");
-const modalFooterPlus = document.querySelector(".modal-footer span");
+const modalPostBtn = (document.querySelector(".modal-header button"));
+const modalFooterPlus = (document.querySelector(".modal-footer span"));
 const modalInput = document.querySelector(".modal-input");
 const user = document.querySelector(".user");
 const sidebar = document.querySelector(".sidebar");
@@ -26,6 +34,7 @@ const passwordInput = document.getElementById('password');
 const passwordToggle = document.querySelector('.password-toggle');
 const inputPost = document.querySelector('#input__post');
 const postElement = document.querySelector(".posts");
+const postsClass = new Posts();
 /************************************************************ */
 // POST
 const btnPost = document.getElementById("btn__post");
@@ -122,10 +131,10 @@ favoriteBtn === null || favoriteBtn === void 0 ? void 0 : favoriteBtn.addEventLi
     favoriteBtn.classList.toggle("heart-filled");
 });
 //Main Page
-passwordToggle.addEventListener('click', function () {
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    passwordToggle.classList.toggle('fa-eye');
+passwordToggle.addEventListener("click", function () {
+    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+    passwordToggle.classList.toggle("fa-eye");
 });
 const goToLoginPage = () => {
     mainPage.style.display = "none";
@@ -137,32 +146,31 @@ middleContent.addEventListener("click", (e) => {
         goToLoginPage();
     }
 });
-btnTop.addEventListener("click", () => {
+btnTop.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
     const inputUserInfo = document.querySelector(".user-info");
     const inputPassword = document.querySelector("#password");
-    // TODO handle user authentication
     if (inputUserInfo.value !== "" && inputPassword.value !== "") {
         mainPage.style.display = "none";
         newsFeedPage.style.display = "block";
-        // fetchStories();
+        postsClass.fetchPosts();
     }
     else {
         goToLoginPage();
         loginModal.style.display = "block";
     }
-});
+}));
 //Login Page
 modalX.addEventListener("click", () => {
     loginModal.style.display = "none";
 });
 loginFormBtn.addEventListener("click", () => {
-    const loginUserInfo = document.querySelector(".login-user-info");
-    const loginPassword = document.querySelector(".login-password");
+    const loginUserInfo = (document.querySelector(".login-user-info"));
+    const loginPassword = (document.querySelector(".login-password"));
     if (loginUserInfo.value !== "" && loginPassword.value !== "") {
         // TODO handle user authentication
         loginPage.style.display = "none";
         newsFeedPage.style.display = "block";
-        // fetchStories();
+        postsClass.fetchPosts();
     }
     else {
         loginModal.style.display = "block";

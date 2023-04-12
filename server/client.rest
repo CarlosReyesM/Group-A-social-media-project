@@ -9,5 +9,5 @@ Content-Type: application/json
 
 {
   "userId": 1,
-  "tweet": "test content"
+  "tweet": "test content returning all tweet"
 }
