@@ -634,6 +634,10 @@ body {
   border-bottom: 0.1rem solid #eee;
 }
 
+.post-content {
+  width: 100%;
+}
+
 .user-avatar {
   width: 6rem;
   height: 6rem;
@@ -1105,7 +1109,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 96%;
+  width: 88%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
   justify-content: space-between;
@@ -1124,7 +1128,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-right: 24px;
+  
 }
 
 .content__action span i{
@@ -1581,9 +1585,8 @@ body {
   .post-btn {
     left: 60%;
   }
-}
+  }
 
-.pink {
-  color: #ff0051;
-  background-color: #ff0051;
+.heart-filled {
+  color: #e0245e;
 }

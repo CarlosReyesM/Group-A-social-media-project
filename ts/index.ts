@@ -24,7 +24,6 @@ const toggle = <HTMLElement>document.querySelector(".toggle");
 const circle = <HTMLElement>document.querySelector(".circle");
 const passwordInput = <HTMLElement>document.getElementById('password'); 
 const passwordToggle =  <HTMLElement>document.querySelector('.password-toggle');
-const buttonPost = <HTMLElement>document.getElementById('btn__post'); 
 const inputPost = <HTMLInputElement>document.querySelector('#input__post'); 
 const postElement =  <HTMLElement>document.querySelector(".posts");
 
@@ -35,7 +34,7 @@ const postElement =  <HTMLElement>document.querySelector(".posts");
 // POST
 
 const btnPost = <HTMLElement>document.getElementById("btn__post");
-const favoriteBtn = <HTMLElement>document.getElementById("btn__like");
+const favoriteBtn = <HTMLElement>document.getElementById("btn__favourite"); 
 
 const posts = [
   {
@@ -98,7 +97,7 @@ const renderPost = () => {
             <i class="fas fa-retweet"></i></i>
             <span class="retweet-number">${post.retweetNumber}</span>
           </span>
-          <span class="favorite">
+          <span id="btn__favourite" class="favorite">
             <i class="far fa-heart"></i>
             <span class="favorite-number">${post.favoriteNumber}</span>
           </span>
@@ -124,12 +123,12 @@ btnPost?.addEventListener("click", () => {
   posts.push({
     author: "Dang Hoang Ha",
     nametag: "hha.2907",
-    time: "now",
+    time: "Now",
     content: contentInputPost,
     image: "images/user1.jpg",
-    commentNumber: "23234",
-    retweetNumber: "4134",
-    favoriteNumber: "413",
+    commentNumber: "0",
+    retweetNumber: "0",
+    favoriteNumber: "0",
     imagesPost: [],
   });
 
@@ -141,7 +140,8 @@ btnPost?.addEventListener("click", () => {
 });
 
 favoriteBtn?.addEventListener("click", () => {
-  favoriteBtn.classList.toggle("pink");
+  favoriteBtn.classList.toggle("heart-filled");
+  
 });
 
 

@@ -24,13 +24,12 @@ const toggle = document.querySelector(".toggle");
 const circle = document.querySelector(".circle");
 const passwordInput = document.getElementById('password');
 const passwordToggle = document.querySelector('.password-toggle');
-const buttonPost = document.getElementById('btn__post');
 const inputPost = document.querySelector('#input__post');
 const postElement = document.querySelector(".posts");
 /************************************************************ */
 // POST
 const btnPost = document.getElementById("btn__post");
-const favoriteBtn = document.getElementById("btn__like");
+const favoriteBtn = document.getElementById("btn__favourite");
 const posts = [
     {
         author: "Fabrizio Romano",
@@ -85,7 +84,7 @@ const renderPost = () => {
             <i class="fas fa-retweet"></i></i>
             <span class="retweet-number">${post.retweetNumber}</span>
           </span>
-          <span class="favorite">
+          <span id="btn__favourite" class="favorite">
             <i class="far fa-heart"></i>
             <span class="favorite-number">${post.favoriteNumber}</span>
           </span>
@@ -107,12 +106,12 @@ btnPost === null || btnPost === void 0 ? void 0 : btnPost.addEventListener("clic
     posts.push({
         author: "Dang Hoang Ha",
         nametag: "hha.2907",
-        time: "now",
+        time: "Now",
         content: contentInputPost,
         image: "images/user1.jpg",
-        commentNumber: "23234",
-        retweetNumber: "4134",
-        favoriteNumber: "413",
+        commentNumber: "0",
+        retweetNumber: "0",
+        favoriteNumber: "0",
         imagesPost: [],
     });
     renderPost();
@@ -120,7 +119,7 @@ btnPost === null || btnPost === void 0 ? void 0 : btnPost.addEventListener("clic
     modalWrapper.classList.remove("modal-wrapper-display");
 });
 favoriteBtn === null || favoriteBtn === void 0 ? void 0 : favoriteBtn.addEventListener("click", () => {
-    favoriteBtn.classList.toggle("pink");
+    favoriteBtn.classList.toggle("heart-filled");
 });
 //Main Page
 passwordToggle.addEventListener('click', function () {
