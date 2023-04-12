@@ -1,5 +1,13 @@
-"use strict";
-// import {fetchStories} from "./fetchStories.js"
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import Posts from "./classes/posts.js";
 //DOM Elements
 const mainPage = document.querySelector(".main-page");
 const loginPage = document.querySelector(".login-page");
@@ -13,8 +21,8 @@ const postBtn = document.querySelector(".post-btn");
 const modalWrapper = document.querySelector(".modal-wrapper");
 const modal = document.querySelector(".modal");
 const postModalX = document.querySelector(".modal-header i");
-const modalPostBtn = document.querySelector(".modal-header button");
-const modalFooterPlus = document.querySelector(".modal-footer span");
+const modalPostBtn = (document.querySelector(".modal-header button"));
+const modalFooterPlus = (document.querySelector(".modal-footer span"));
 const modalInput = document.querySelector(".modal-input");
 const user = document.querySelector(".user");
 const sidebar = document.querySelector(".sidebar");
@@ -22,100 +30,20 @@ const sidebarWrapper = document.querySelector(".sidebar-wrapper");
 const xBtn = document.querySelector(".sidebar-header i");
 const toggle = document.querySelector(".toggle");
 const circle = document.querySelector(".circle");
-const passwordInput = document.getElementById('password');
-const passwordToggle = document.querySelector('.password-toggle');
-const buttonPost = document.getElementById('btn__post');
-const inputPost = document.querySelector('#input__post');
+const passwordInput = document.getElementById("password");
+const passwordToggle = document.querySelector(".password-toggle");
+const buttonPost = document.getElementById("btn__post");
+const inputPost = document.querySelector("#input__post");
 const postElement = document.querySelector(".posts");
+const postsClass = new Posts();
 /************************************************************ */
 // POST
 const btnPost = document.getElementById("btn__post");
 const favoriteBtn = document.getElementById("btn__like");
-const posts = [
-    {
-        author: "Fabrizio Romano",
-        nametag: "FabrizioRomano",
-        time: "28d",
-        content: " Sergio Agüero on Messi and Barça again: “If president Laporta makes the step, I think Messi’s return to Barcelona will come closer”. 🇦🇷 #FCB Messi has completed 800 career goals last night by scoring vs Panama… …and has no full agreement with PSG on new deal, at this stage.",
-        image: "https://firebasestorage.googleapis.com/v0/b/twitter-fb3ea.appspot.com/o/user2.jpg?alt=media&token=96bb8c47-4801-49c1-b798-eecbfcc3ab8e",
-        commentNumber: "1.8K",
-        retweetNumber: "16,8K",
-        favoriteNumber: "84,5K",
-        imagesPost: ["https://firebasestorage.googleapis.com/v0/b/twitter-fb3ea.appspot.com/o/post-img-1.jpg?alt=media&token=c51907a4-a793-4f18-8e37-1a83deee0a7c"],
-    },
-    {
-        author: "CS2",
-        nametag: "CounterStrike",
-        time: "7d",
-        content: " The Paris Major will be the final CS:GO Major. The following Major will be in March 2024 and the first in Counter-Strike 2.",
-        image: "images/user5.jpg",
-        commentNumber: "1.8K",
-        retweetNumber: "16,8K",
-        favoriteNumber: "84,5K",
-        imagesPost: [],
-    },
-];
-const renderPost = () => {
-    const htmls = posts
-        .map((post, index) => {
-        return `
-    <div class="post border">
-      <div class="user-avatar">
-        <img src="${post.image}"/>
-      </div>
-      <div class="post-content">
-        <div class="post-user-info light-text">
-          <h4>${post.author}</h4>
-          <span>@${post.nametag.trim()} . ${post.time}</span>
-        </div>
-        <p class="post-text light-text">
-          ${post.content}  
-        </p>
-        <div class="post-img">
-          ${post.imagesPost.map((image) => {
-            return `<img src="${image}" alt="post" />`;
-        })}
-        </div>
-        <div class="content__action">
-          <span class="comment">
-            <i class="far fa-comment"></i>
-            <span class="comment-number">${post.commentNumber}</span>
-          </span>
-          <span class="retweet">
-            <i class="fas fa-retweet"></i></i>
-            <span class="retweet-number">${post.retweetNumber}</span>
-          </span>
-          <span class="favorite">
-            <i class="far fa-heart"></i>
-            <span class="favorite-number">${post.favoriteNumber}</span>
-          </span>
-          <span class="external-link">
-            <i class='bx bx-link-external'></i>
-            <span class="share">Share</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  `;
-    })
-        .join("");
-    postElement.innerHTML = htmls;
-};
 btnPost === null || btnPost === void 0 ? void 0 : btnPost.addEventListener("click", () => {
     const contentInputPost = inputPost.value;
     console.log(contentInputPost);
-    posts.push({
-        author: "Dang Hoang Ha",
-        nametag: "hha.2907",
-        time: "now",
-        content: contentInputPost,
-        image: "images/user1.jpg",
-        commentNumber: "23234",
-        retweetNumber: "4134",
-        favoriteNumber: "413",
-        imagesPost: [],
-    });
-    renderPost();
+    postsClass.createPost(contentInputPost);
     modal.style.display = "none";
     modalWrapper.classList.remove("modal-wrapper-display");
 });
@@ -123,10 +51,10 @@ favoriteBtn === null || favoriteBtn === void 0 ? void 0 : favoriteBtn.addEventLi
     favoriteBtn.classList.toggle("pink");
 });
 //Main Page
-passwordToggle.addEventListener('click', function () {
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    passwordToggle.classList.toggle('fa-eye');
+passwordToggle.addEventListener("click", function () {
+    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+    passwordToggle.classList.toggle("fa-eye");
 });
 const goToLoginPage = () => {
     mainPage.style.display = "none";
@@ -138,32 +66,31 @@ middleContent.addEventListener("click", (e) => {
         goToLoginPage();
     }
 });
-btnTop.addEventListener("click", () => {
+btnTop.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
     const inputUserInfo = document.querySelector(".user-info");
     const inputPassword = document.querySelector("#password");
-    // TODO handle user authentication
     if (inputUserInfo.value !== "" && inputPassword.value !== "") {
         mainPage.style.display = "none";
         newsFeedPage.style.display = "block";
-        // fetchStories();
+        postsClass.fetchPosts();
     }
     else {
         goToLoginPage();
         loginModal.style.display = "block";
     }
-});
+}));
 //Login Page
 modalX.addEventListener("click", () => {
     loginModal.style.display = "none";
 });
 loginFormBtn.addEventListener("click", () => {
-    const loginUserInfo = document.querySelector(".login-user-info");
-    const loginPassword = document.querySelector(".login-password");
+    const loginUserInfo = (document.querySelector(".login-user-info"));
+    const loginPassword = (document.querySelector(".login-password"));
     if (loginUserInfo.value !== "" && loginPassword.value !== "") {
         // TODO handle user authentication
         loginPage.style.display = "none";
         newsFeedPage.style.display = "block";
-        // fetchStories();
+        postsClass.fetchPosts();
     }
     else {
         loginModal.style.display = "block";

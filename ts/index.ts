@@ -1,4 +1,5 @@
-// import {fetchStories} from "./fetchStories.js"
+import Posts from "./classes/posts.js";
+import { Post } from "./interfaces/post.js";
 
 //DOM Elements
 const mainPage = <HTMLElement>document.querySelector(".main-page");
@@ -13,8 +14,12 @@ const postBtn = <HTMLElement>document.querySelector(".post-btn");
 const modalWrapper = <HTMLElement>document.querySelector(".modal-wrapper");
 const modal = <HTMLElement>document.querySelector(".modal");
 const postModalX = <HTMLElement>document.querySelector(".modal-header i");
-const modalPostBtn = <HTMLElement>document.querySelector(".modal-header button");
-const modalFooterPlus = <HTMLElement>document.querySelector(".modal-footer span");
+const modalPostBtn = <HTMLElement>(
+  document.querySelector(".modal-header button")
+);
+const modalFooterPlus = <HTMLElement>(
+  document.querySelector(".modal-footer span")
+);
 const modalInput = <HTMLInputElement>document.querySelector(".modal-input");
 const user = <HTMLElement>document.querySelector(".user");
 const sidebar = <HTMLElement>document.querySelector(".sidebar");
@@ -22,14 +27,13 @@ const sidebarWrapper = <HTMLElement>document.querySelector(".sidebar-wrapper");
 const xBtn = <HTMLElement>document.querySelector(".sidebar-header i");
 const toggle = <HTMLElement>document.querySelector(".toggle");
 const circle = <HTMLElement>document.querySelector(".circle");
-const passwordInput = <HTMLElement>document.getElementById('password'); 
-const passwordToggle =  <HTMLElement>document.querySelector('.password-toggle');
-const buttonPost = <HTMLElement>document.getElementById('btn__post'); 
-const inputPost = <HTMLInputElement>document.querySelector('#input__post'); 
-const postElement =  <HTMLElement>document.querySelector(".posts");
+const passwordInput = <HTMLElement>document.getElementById("password");
+const passwordToggle = <HTMLElement>document.querySelector(".password-toggle");
+const buttonPost = <HTMLElement>document.getElementById("btn__post");
+const inputPost = <HTMLInputElement>document.querySelector("#input__post");
+const postElement = <HTMLElement>document.querySelector(".posts");
 
-
-
+const postsClass = new Posts();
 
 /************************************************************ */
 // POST
@@ -37,104 +41,11 @@ const postElement =  <HTMLElement>document.querySelector(".posts");
 const btnPost = <HTMLElement>document.getElementById("btn__post");
 const favoriteBtn = <HTMLElement>document.getElementById("btn__like");
 
-const posts = [
-  {
-    author: "Fabrizio Romano",
-    nametag: "FabrizioRomano",
-    time: "28d",
-    content:
-      " Sergio Agüero on Messi and Barça again: “If president Laporta makes the step, I think Messi’s return to Barcelona will come closer”. 🇦🇷 #FCB Messi has completed 800 career goals last night by scoring vs Panama… …and has no full agreement with PSG on new deal, at this stage.",
-    image: "https://firebasestorage.googleapis.com/v0/b/twitter-fb3ea.appspot.com/o/user2.jpg?alt=media&token=96bb8c47-4801-49c1-b798-eecbfcc3ab8e",
-    commentNumber: "1.8K",
-    retweetNumber: "16,8K",
-    favoriteNumber: "84,5K",
-    imagesPost: ["https://firebasestorage.googleapis.com/v0/b/twitter-fb3ea.appspot.com/o/post-img-1.jpg?alt=media&token=c51907a4-a793-4f18-8e37-1a83deee0a7c"],
-  },
-  {
-    author: "CS2",
-    nametag: "CounterStrike",
-    time: "7d",
-    content:
-      " The Paris Major will be the final CS:GO Major. The following Major will be in March 2024 and the first in Counter-Strike 2.",
-    image: "images/user5.jpg",
-    commentNumber: "1.8K",
-    retweetNumber: "16,8K",
-    favoriteNumber: "84,5K",
-    imagesPost: [],
-  },
-
-
-
-];
-
-
-const renderPost = () => {
-  const htmls = posts
-    .map((post, index) => {
-      return `
-    <div class="post border">
-      <div class="user-avatar">
-        <img src="${post.image}"/>
-      </div>
-      <div class="post-content">
-        <div class="post-user-info light-text">
-          <h4>${post.author}</h4>
-          <span>@${post.nametag.trim()} . ${post.time}</span>
-        </div>
-        <p class="post-text light-text">
-          ${post.content}  
-        </p>
-        <div class="post-img">
-          ${post.imagesPost.map((image) => {
-            return `<img src="${image}" alt="post" />`;
-          })}
-        </div>
-        <div class="content__action">
-          <span class="comment">
-            <i class="far fa-comment"></i>
-            <span class="comment-number">${post.commentNumber}</span>
-          </span>
-          <span class="retweet">
-            <i class="fas fa-retweet"></i></i>
-            <span class="retweet-number">${post.retweetNumber}</span>
-          </span>
-          <span class="favorite">
-            <i class="far fa-heart"></i>
-            <span class="favorite-number">${post.favoriteNumber}</span>
-          </span>
-          <span class="external-link">
-            <i class='bx bx-link-external'></i>
-            <span class="share">Share</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  `;
-    })
-    .join("");
-    
-    postElement.innerHTML = htmls
-};
 
 btnPost?.addEventListener("click", () => {
-
   const contentInputPost = inputPost.value;
   console.log(contentInputPost);
-
-  posts.push({
-    author: "Dang Hoang Ha",
-    nametag: "hha.2907",
-    time: "now",
-    content: contentInputPost,
-    image: "images/user1.jpg",
-    commentNumber: "23234",
-    retweetNumber: "4134",
-    favoriteNumber: "413",
-    imagesPost: [],
-  });
-
-
-  renderPost();
+  postsClass.createPost(contentInputPost);
 
   modal.style.display = "none";
   modalWrapper.classList.remove("modal-wrapper-display");
@@ -144,13 +55,13 @@ favoriteBtn?.addEventListener("click", () => {
   favoriteBtn.classList.toggle("pink");
 });
 
-
 //Main Page
 
-passwordToggle.addEventListener('click', function() {
-  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-  passwordInput.setAttribute('type', type);
-  passwordToggle.classList.toggle('fa-eye');
+passwordToggle.addEventListener("click", function () {
+  const type =
+    passwordInput.getAttribute("type") === "password" ? "text" : "password";
+  passwordInput.setAttribute("type", type);
+  passwordToggle.classList.toggle("fa-eye");
 });
 
 const goToLoginPage = () => {
@@ -165,15 +76,14 @@ middleContent.addEventListener("click", (e) => {
   }
 });
 
-btnTop.addEventListener("click", () => {
+btnTop.addEventListener("click", async () => {
   const inputUserInfo = <HTMLInputElement>document.querySelector(".user-info");
   const inputPassword = <HTMLInputElement>document.querySelector("#password");
 
-  // TODO handle user authentication
   if (inputUserInfo.value !== "" && inputPassword.value !== "") {
     mainPage.style.display = "none";
     newsFeedPage.style.display = "block";
-    // fetchStories();
+    postsClass.fetchPosts();
   } else {
     goToLoginPage();
     loginModal.style.display = "block";
@@ -187,19 +97,22 @@ modalX.addEventListener("click", () => {
 });
 
 loginFormBtn.addEventListener("click", () => {
-  const loginUserInfo = <HTMLInputElement>document.querySelector(".login-user-info");
-  const loginPassword = <HTMLInputElement>document.querySelector(".login-password");
+  const loginUserInfo = <HTMLInputElement>(
+    document.querySelector(".login-user-info")
+  );
+  const loginPassword = <HTMLInputElement>(
+    document.querySelector(".login-password")
+  );
 
   if (loginUserInfo.value !== "" && loginPassword.value !== "") {
-  // TODO handle user authentication
+    // TODO handle user authentication
     loginPage.style.display = "none";
     newsFeedPage.style.display = "block";
-    // fetchStories();
+    postsClass.fetchPosts();
   } else {
     loginModal.style.display = "block";
   }
 });
-
 
 // News Feed Page
 // Post modal
@@ -267,6 +180,3 @@ toggle.addEventListener("click", () => {
   );
   Array.from(borders).map((border) => border.classList.toggle("border-color"));
 });
-
-
-
