@@ -46,6 +46,7 @@ exports.tweetsRouter.get("/:id", (req, res) => {
   `, [userId], (error, result) => {
         if (error) {
             res.status(500).json({ error: error });
+            return;
         }
         res.status(200).json(result.rows.map((r) => parsePosts(r)));
     });
@@ -81,6 +82,7 @@ exports.tweetsRouter.post("/", (req, res) => {
       `, [result.rows[0].id], (error, result) => {
             if (error) {
                 res.status(500).json({ error: error });
+                return;
             }
             res.status(200).json(result.rows.map((r) => parsePosts(r)));
         });

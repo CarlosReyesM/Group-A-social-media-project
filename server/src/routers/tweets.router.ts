@@ -49,6 +49,7 @@ tweetsRouter.get("/:id", (req: Request, res: Response) => {
     (error, result: QueryResult<QueryPosts>) => {
       if (error) {
         res.status(500).json({ error: error });
+        return;
       }
       res.status(200).json(result.rows.map((r) => parsePosts(r)));
     }
@@ -92,6 +93,7 @@ tweetsRouter.post("/", (req: Request, res: Response) => {
         (error, result: QueryResult<QueryPosts>) => {
           if (error) {
             res.status(500).json({ error: error });
+            return;
           }
           res.status(200).json(result.rows.map((r) => parsePosts(r)));
         }

@@ -63,67 +63,10 @@ const posts = [
         imagesPost: [],
     },
 ];
-const renderPost = () => {
-    const htmls = posts
-        .map((post, index) => {
-        return `
-    <div class="post border">
-      <div class="user-avatar">
-        <img src="${post.image}"/>
-      </div>
-      <div class="post-content">
-        <div class="post-user-info light-text">
-          <h4>${post.author}</h4>
-          <span>@${post.nametag.trim()} . ${post.time}</span>
-        </div>
-        <p class="post-text light-text">
-          ${post.content}  
-        </p>
-        <div class="post-img">
-          ${post.imagesPost.map((image) => {
-            return `<img src="${image}" alt="post" />`;
-        })}
-        </div>
-        <div class="content__action">
-          <span class="comment">
-            <i class="far fa-comment"></i>
-            <span class="comment-number">${post.commentNumber}</span>
-          </span>
-          <span class="retweet">
-            <i class="fas fa-retweet"></i></i>
-            <span class="retweet-number">${post.retweetNumber}</span>
-          </span>
-          <span id="btn__favourite" class="favorite">
-            <i class="far fa-heart"></i>
-            <span class="favorite-number">${post.favoriteNumber}</span>
-          </span>
-          <span class="external-link">
-            <i class='bx bx-link-external'></i>
-            <span class="share">Share</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  `;
-    })
-        .join("");
-    postElement.innerHTML = htmls;
-};
 btnPost === null || btnPost === void 0 ? void 0 : btnPost.addEventListener("click", () => {
     const contentInputPost = inputPost.value;
     console.log(contentInputPost);
-    posts.push({
-        author: "Dang Hoang Ha",
-        nametag: "hha.2907",
-        time: "Now",
-        content: contentInputPost,
-        image: "images/user1.jpg",
-        commentNumber: "0",
-        retweetNumber: "0",
-        favoriteNumber: "0",
-        imagesPost: [],
-    });
-    renderPost();
+    postsClass.createPost(contentInputPost);
     modal.style.display = "none";
     modalWrapper.classList.remove("modal-wrapper-display");
 });
