@@ -38,7 +38,6 @@ const postsClass = new Posts();
 /************************************************************ */
 // POST
 const btnPost = document.getElementById("btn__post");
-const favoriteBtn = document.getElementById("btn__favourite");
 const posts = [
     {
         author: "Fabrizio Romano",
@@ -69,9 +68,6 @@ btnPost === null || btnPost === void 0 ? void 0 : btnPost.addEventListener("clic
     postsClass.createPost(contentInputPost);
     modal.style.display = "none";
     modalWrapper.classList.remove("modal-wrapper-display");
-});
-favoriteBtn === null || favoriteBtn === void 0 ? void 0 : favoriteBtn.addEventListener("click", () => {
-    favoriteBtn.classList.toggle("heart-filled");
 });
 //Main Page
 passwordToggle.addEventListener("click", function () {
@@ -168,3 +164,29 @@ toggle.addEventListener("click", () => {
     Array.from(lightTexts).map((lightText) => lightText.classList.toggle("light"));
     Array.from(borders).map((border) => border.classList.toggle("border-color"));
 });
+const followBtns = document.querySelectorAll('.follow-btn');
+for (const followBtn of followBtns) {
+    followBtn.addEventListener('click', function () {
+        followBtn.classList.toggle('followed');
+        if (followBtn.classList.contains('followed')) {
+            followBtn.textContent = 'Followed';
+            followBtn.classList.add('unfollowed');
+        }
+        else {
+            followBtn.textContent = 'Follow';
+            followBtn.classList.remove('unfollowed');
+        }
+    });
+    followBtn.addEventListener('mouseenter', function () {
+        if (followBtn.classList.contains('followed')) {
+            followBtn.textContent = 'Unfollow';
+            followBtn.classList.add('unfollowed');
+        }
+    });
+    followBtn.addEventListener('mouseleave', function () {
+        if (followBtn.classList.contains('followed')) {
+            followBtn.textContent = 'Followed';
+            followBtn.classList.remove('unfollowed');
+        }
+    });
+}

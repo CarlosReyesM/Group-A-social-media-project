@@ -632,6 +632,7 @@ body {
   display: flex;
   padding: 1.5rem;
   border-bottom: 0.1rem solid #eee;
+  
 }
 
 .post-content {
@@ -762,24 +763,37 @@ body {
 
 .follow-user i {
   color: #1aa1f5;
-  margin-left: 4px;
+  margin-left: 2px;
 }
 
 .follow-btn {
   margin-left: auto;
   width: 9rem;
-  background-color: #fff;
-  color: #1aa1f5;
+  color: #fff;
+  background-color: #1aa1f5;
   padding: 0.7rem 0.5rem;
   border: 0.1rem solid #1aa1f5;
   border-radius: 2rem;
   font-size: 1.6rem;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .follow-btn:hover {
-  background-color: #1aa1f5;
-  color: #fff;
+  color: #1aa1f5;
+  background-color: #fff;
+}
+
+.followed {
+  color: #1aa1f5;
+  background-color: #fff;
+}
+
+.followed:hover {
+  background-color: rgba(255, 187, 187, 0.8);
+  color: rgb(255, 0, 0);
+  border: 1px solid rgb(255, 0, 0);
+  font-weight: 600;
 }
 
 .follow-link {
@@ -1587,6 +1601,8 @@ body {
   }
   }
 
-.heart-filled {
-  color: #e0245e;
-}
+  .heart-filled {
+    color: red;
+    background-color: red;
+  }
+  

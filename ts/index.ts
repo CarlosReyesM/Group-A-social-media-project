@@ -40,7 +40,6 @@ const postsClass = new Posts();
 // POST
 
 const btnPost = <HTMLElement>document.getElementById("btn__post");
-const favoriteBtn = <HTMLElement>document.getElementById("btn__favourite"); 
 
 const posts = [
   {
@@ -82,10 +81,10 @@ btnPost?.addEventListener("click", () => {
   modalWrapper.classList.remove("modal-wrapper-display");
 });
 
-favoriteBtn?.addEventListener("click", () => {
-  favoriteBtn.classList.toggle("heart-filled");
-  
-});
+
+
+
+
 
 //Main Page
 
@@ -212,3 +211,33 @@ toggle.addEventListener("click", () => {
   );
   Array.from(borders).map((border) => border.classList.toggle("border-color"));
 });
+
+const followBtns = document.querySelectorAll('.follow-btn') as NodeListOf<HTMLButtonElement>;
+
+for (const followBtn of followBtns) {
+  followBtn.addEventListener('click', function() {
+    followBtn.classList.toggle('followed');
+
+    if (followBtn.classList.contains('followed')) {
+      followBtn.textContent = 'Followed';
+      followBtn.classList.add('unfollowed');
+    } else {
+      followBtn.textContent = 'Follow';
+      followBtn.classList.remove('unfollowed');
+    }
+  });
+
+  followBtn.addEventListener('mouseenter', function() {
+    if (followBtn.classList.contains('followed')) {
+      followBtn.textContent = 'Unfollow';
+      followBtn.classList.add('unfollowed');
+    }
+  });
+
+  followBtn.addEventListener('mouseleave', function() {
+    if (followBtn.classList.contains('followed')) {
+      followBtn.textContent = 'Followed';
+      followBtn.classList.remove('unfollowed');
+    }
+  });
+}
