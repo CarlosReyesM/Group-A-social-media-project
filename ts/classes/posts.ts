@@ -141,3 +141,4 @@ export default class Posts {
     posts.forEach((post) => postElement.appendChild(this.buildPost(post)));
   };
 }
+
