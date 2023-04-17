@@ -16,6 +16,7 @@ exports.tweetsRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const database_1 = require("../database");
 const formatDistance_1 = __importDefault(require("date-fns/formatDistance"));
+const path_1 = __importDefault(require("path"));
 exports.tweetsRouter = express_1.default.Router();
 const parsePosts = (posts) => {
     return {
@@ -61,9 +62,11 @@ exports.tweetsRouter.get("/:id", (req, res) => {
     });
 });
 exports.tweetsRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const pool = (0, database_1.openDb)();
     const userId = req.body.userId;
     const tweet = req.body.tweet;
+    const file = (_a = req.files) === null || _a === void 0 ? void 0 : _a.image;
     if (!userId || !tweet) {
         res.status(400).json({ error: "bad request" });
         return;
@@ -73,9 +76,25 @@ exports.tweetsRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
         .query("BEGIN")
         .then(() => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield client.query("insert into tweets (user_id, content, timestamp) values ($1, $2, now()) returning id", [userId, tweet]);
+        yield client.query("COMMIT");
         return result;
     }))
         .then((result) => __awaiter(void 0, void 0, void 0, function* () {
+        const tweetId = result.rows[0].id;
+        if (!file) {
+            return tweetId;
+        }
+        file.mv(path_1.default.resolve(`./public/images/${file.name}`), (err) => {
+            if (err) {
+                console.log(err);
+                throw new Error(err);
+            }
+        });
+        yield client.query("insert into images (address, name, tweet_id, user_id) values ($1, $2, $3, $4)", [`/images/${file.name}`, file.name, tweetId, userId]);
+        yield client.query("COMMIT");
+        return tweetId;
+    }))
+        .then((tweetId) => __awaiter(void 0, void 0, void 0, function* () {
         const newPostRows = yield client.query(`
   SELECT
     t.content,
@@ -91,7 +110,7 @@ exports.tweetsRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
     LEFT JOIN users u ON user_id = u.id
     LEFT JOIN images i ON t.id = i.tweet_id
     WHERE t.id = $1;
-`, [result.rows[0].id]);
+`, [tweetId]);
         res.status(200).json(newPostRows.rows.map((r) => parsePosts(r)));
         return;
     }))
