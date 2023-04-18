@@ -151,3 +151,19 @@ tweetsRouter.delete('/:id', (req: Request, res: Response) => {
   );
 });
 
+tweetsRouter.put('/:id', (req: Request, res: Response) => {
+  const tweetId = req.params.id;
+  const content = req.body.tweet;
+  const pool = openDb();
+  pool.query(
+    "UPDATE tweets SET content = $1 WHERE id = $2 returning *",
+    [content, tweetId],
+    (error, result: QueryResult<QueryPosts>) => {
+      if (error) {
+        res.status(500).json({ error: error.message });
+        return;
+      }
+      res.status(200).json(result.rows[0]);
+    }
+  );
+});
