@@ -1,5 +1,4 @@
 import Posts from "./classes/posts.js";
-import { Post } from "./interfaces/post.js";
 
 //DOM Elements
 const mainPage = <HTMLElement>document.querySelector(".main-page");
@@ -30,7 +29,6 @@ const circle = <HTMLElement>document.querySelector(".circle");
 const passwordInput = <HTMLElement>document.getElementById('password'); 
 const passwordToggle =  <HTMLElement>document.querySelector('.password-toggle');
 const inputPost = <HTMLInputElement>document.querySelector('#input__post'); 
-const postElement =  <HTMLElement>document.querySelector(".posts");
 
 
 
@@ -40,36 +38,6 @@ const postsClass = new Posts();
 // POST
 
 const btnPost = <HTMLElement>document.getElementById("btn__post");
-
-const posts = [
-  {
-    author: "Fabrizio Romano",
-    nametag: "FabrizioRomano",
-    time: "28d",
-    content:
-      " Sergio Agüero on Messi and Barça again: “If president Laporta makes the step, I think Messi’s return to Barcelona will come closer”. 🇦🇷 #FCB Messi has completed 800 career goals last night by scoring vs Panama… …and has no full agreement with PSG on new deal, at this stage.",
-    image: "https://firebasestorage.googleapis.com/v0/b/twitter-fb3ea.appspot.com/o/user2.jpg?alt=media&token=96bb8c47-4801-49c1-b798-eecbfcc3ab8e",
-    commentNumber: "1.8K",
-    retweetNumber: "16,8K",
-    favoriteNumber: "84,5K",
-    imagesPost: ["https://firebasestorage.googleapis.com/v0/b/twitter-fb3ea.appspot.com/o/post-img-1.jpg?alt=media&token=c51907a4-a793-4f18-8e37-1a83deee0a7c"],
-  },
-  {
-    author: "CS2",
-    nametag: "CounterStrike",
-    time: "7d",
-    content:
-      " The Paris Major will be the final CS:GO Major. The following Major will be in March 2024 and the first in Counter-Strike 2.",
-    image: "images/user5.jpg",
-    commentNumber: "1.8K",
-    retweetNumber: "16,8K",
-    favoriteNumber: "84,5K",
-    imagesPost: [],
-  },
-
-
-
-];
 
 btnPost?.addEventListener("click", () => {
   const contentInputPost = inputPost.value;
