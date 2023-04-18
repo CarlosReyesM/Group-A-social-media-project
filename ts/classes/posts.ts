@@ -13,7 +13,7 @@ export default class Posts {
     // TODO get user id from JWT
     const userId = 1;
     try {
-      const posts: Post[] = await fetch(`${MAIN_URL}/tweets/${userId}`).then(
+      const posts: Post[] = await fetch(`${MAIN_URL}/tweets/all/${userId}`).then(
         (result) => result.json()
       );
       this.posts = posts;

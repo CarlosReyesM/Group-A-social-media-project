@@ -20,6 +20,7 @@ const path_1 = __importDefault(require("path"));
 exports.tweetsRouter = express_1.default.Router();
 const parsePosts = (posts) => {
     return {
+        tweetId: posts.id,
         author: posts.name,
         nametag: posts.name_tag || posts.name,
         avatar: posts.avatar,
@@ -34,13 +35,14 @@ const parsePosts = (posts) => {
 exports.tweetsRouter.use((req, res, next) => {
     next();
 });
-exports.tweetsRouter.get("/:id", (req, res) => {
+exports.tweetsRouter.get("/all/:id", (req, res) => {
     const userId = req.params.id;
     const pool = (0, database_1.openDb)();
     pool.query(`
     SELECT
       t.content,
       t.timestamp,
+      t.id,
       u.name,
       u.name_tag,
       u.avatar,
@@ -99,6 +101,7 @@ exports.tweetsRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
   SELECT
     t.content,
     t.timestamp,
+    t.id,
     u.name,
     u.name_tag,
     u.avatar,
@@ -120,3 +123,14 @@ exports.tweetsRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
     })
         .finally(() => client.release());
 }));
+exports.tweetsRouter.delete('/:id', (req, res) => {
+    const tweetId = req.params.id;
+    const pool = (0, database_1.openDb)();
+    pool.query("DELETE FROM tweets WHERE id = $1", [tweetId], (error, result) => {
+        if (error) {
+            res.status(500).json({ error: error });
+            return;
+        }
+        res.status(200).json({ id: tweetId });
+    });
+});

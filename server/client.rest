@@ -1,6 +1,6 @@
 ### get inital values
 
-GET http://localhost:3001/tweets/1
+GET http://localhost:3001/tweets/all/1
 
 ### post new tweet
 
@@ -11,3 +11,7 @@ Content-Type: application/json
   "userId": 1,
   "tweet": "test content returning all tweet 3"
 }
+
+### delete tweet
+
+DELETE http://localhost:3001/tweets/50

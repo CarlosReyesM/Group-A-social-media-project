@@ -1,4 +1,5 @@
 export interface Post {
+  tweetId: string;
   author: string;
   nametag: string;
   time: string;
@@ -13,6 +14,7 @@ export interface Post {
 export interface QueryPosts {
   content: string;
   timestamp: string | null;
+  id: string;
   name: string;
   name_tag: string |  null;
   avatar: string;
