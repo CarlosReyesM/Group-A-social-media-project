@@ -462,6 +462,7 @@ body {
   display: flex;
   justify-content: center;
   box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.3);
+  z-index: 999;
 }
 
 .icons {
@@ -632,7 +633,7 @@ body {
   display: flex;
   padding: 1.5rem;
   border-bottom: 0.1rem solid #eee;
-  
+  position: relative;
 }
 
 .post-content {
@@ -662,6 +663,7 @@ body {
   display: flex;
   align-items: center;
   margin: 0 0 1rem 0;
+  width: 100%;
 }
 
 .post-user-info h4 {
@@ -1604,5 +1606,57 @@ body {
   .heart-filled {
     color: red;
     background-color: red;
+  }
+  
+
+  .settings {
+    float: right;
+    position: relative;
+    color: #000000;
+    font-size: 1.6rem;
+    cursor: pointer;
+    
+  }
+
+  .options {
+    position: absolute;
+    width: 144px;
+    right: 0px;
+    display: none;
+    border: 1px solid #ccc;
+    z-index: 10;
+    background-color: #fff;
+    box-shadow: rgba(136, 153, 166, 0.2) 0px 0px 15px, rgba(136, 153, 166, 0.15) 0px 0px 3px 1px;
+    border-radius: 4px;
+  }
+
+  .options div:hover {
+    cursor: pointer;
+    background-color: #e0e0e0;
+  }
+
+  .options div {
+    display: flex;
+  }
+
+  .edit-container {
+    padding: 10px;
+    border-bottom: 1px solid #cccccc;
+  }
+
+  .delete-container {
+    padding:  10px;
+    color: red;
+  }
+
+  .options i {
+    position: absolute;
+    align-self: center;
+    
+  }
+
+  .option-text {
+    
+    margin-left: 24px;
   }
   

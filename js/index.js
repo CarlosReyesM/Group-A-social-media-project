@@ -44,6 +44,10 @@ btnPost === null || btnPost === void 0 ? void 0 : btnPost.addEventListener("clic
     modal.style.display = "none";
     modalWrapper.classList.remove("modal-wrapper-display");
 });
+const favoriteBtn = document.querySelector('.favorite');
+favoriteBtn === null || favoriteBtn === void 0 ? void 0 : favoriteBtn.addEventListener('click', function () {
+    this.classList.toggle('heart-filled');
+});
 //Main Page
 passwordToggle.addEventListener("click", function () {
     const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";

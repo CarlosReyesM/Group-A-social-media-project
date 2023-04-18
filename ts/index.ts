@@ -49,7 +49,11 @@ btnPost?.addEventListener("click", () => {
   modalWrapper.classList.remove("modal-wrapper-display");
 });
 
+const favoriteBtn: HTMLElement | null = document.querySelector('.favorite');
 
+favoriteBtn?.addEventListener('click', function() {
+  this.classList.toggle('heart-filled');
+});
 
 
 
@@ -209,3 +213,4 @@ for (const followBtn of followBtns) {
     }
   });
 }
+
