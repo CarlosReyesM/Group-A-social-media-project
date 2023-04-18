@@ -65,7 +65,53 @@ export default class Posts {
     const tagAndTimeText = textNode(`@${post.nametag.trim()} . ${post.time}`);
     nameTag.appendChild(tagAndTimeText);
     postUserInfo.append(author, nameTag);
+    const settings = document.createElement('div');
+    settings.classList.add('settings');
 
+    const ellipsis = document.createElement('i');
+    ellipsis.classList.add('fa-solid', 'fa-ellipsis');
+    settings.appendChild(ellipsis);
+    
+    const options = document.createElement('div');
+    options.classList.add('options');
+
+
+
+const editContainer = createElement<HTMLDivElement>("div", "edit-container");
+const editOption = createElement<HTMLDivElement>("div", "option-text");
+editOption.textContent = 'Edit Post';
+const editIcon = createElement<HTMLDivElement>("i", "fa-solid fa-gear");
+editContainer.append(editOption, editIcon);
+
+options.appendChild(editContainer);
+
+const deleteContainer = createElement<HTMLDivElement>("div", "delete-container")
+const deleteOption = createElement<HTMLDivElement>("div", "option-text");
+const deleteIcon = createElement<HTMLDivElement>("i", "fa-solid fa-trash");
+deleteOption.textContent = 'Delete Post';
+deleteContainer.append(deleteOption, deleteIcon);
+
+options.appendChild(deleteContainer);
+
+
+settings.appendChild(options);
+let isOptionsVisible = false;
+
+// Thêm sự kiện click vào biểu tượng "ellipsis"
+ellipsis.addEventListener('click', () => {
+  // Nếu phần tử "options" đang được hiển thị, ẩn nó đi
+  if (isOptionsVisible) {
+    options.style.display = 'none';
+    isOptionsVisible = false;
+  } else {
+    // Nếu phần tử "options" đang bị ẩn, hiển thị nó lên
+    options.style.display = 'block';
+    isOptionsVisible = true;
+  }
+  
+});
+
+    
     const postText = createElement<HTMLParagraphElement>(
       "p",
       "post-text light-text"
@@ -130,15 +176,18 @@ export default class Posts {
     retweet.append(retweetIcon, retweetNumberContainer);
     favorite.append(favoriteIcon, favoriteNumberContainer);
     externalLink.append(externalLinkIcon, externalLinkContainer);
-
     contentAction.append(comments, retweet, favorite, externalLink);
     postContent.append(contentAction);
-    container.append(userAvatar, postContent);
+    container.append(userAvatar, postContent, settings);
     return container;
   }
 
+
+  
   renderPost = (posts: Post[]) => {
     posts.forEach((post) => postElement.appendChild(this.buildPost(post)));
   };
 }
+
+
 
