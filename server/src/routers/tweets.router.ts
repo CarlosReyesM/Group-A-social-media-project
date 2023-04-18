@@ -3,7 +3,7 @@ import { openDb } from "../database";
 import { QueryResult } from "pg";
 import { Post, QueryPosts } from "../models/posts";
 import formatDistance from "date-fns/formatDistance";
-import fileUpload, { UploadedFile } from "express-fileupload";
+import { UploadedFile } from "express-fileupload";
 import path from "path";
 
 export const tweetsRouter = express.Router();

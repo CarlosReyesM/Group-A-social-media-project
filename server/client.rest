@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
   "userId": 1,
-  "tweet": "test content returning all tweet 3"
+  "tweet": "some interesting things going on"
 }
 
 ### delete tweet
@@ -24,3 +24,31 @@ Content-Type: application/json
 {
   "tweet": "updating tweet number 49"
 }
+
+### get comments
+
+GET http://localhost:3001/comments/?tweetId=49
+
+### post new comment
+
+POST http://localhost:3001/comments
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "tweetId": 49,
+  "content": "some comment for tweet 49"
+}
+
+### update comment
+
+PUT http://localhost:3001/comments/2
+Content-Type: application/json
+
+{
+  "content": "updating the second comment"
+}
+
+### delete comment
+
+DELETE http://localhost:3001/comments/2
