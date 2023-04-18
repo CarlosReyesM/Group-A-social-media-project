@@ -49,11 +49,7 @@ btnPost?.addEventListener("click", () => {
   modalWrapper.classList.remove("modal-wrapper-display");
 });
 
-const favoriteBtn: HTMLElement | null = document.querySelector('.favorite');
 
-favoriteBtn?.addEventListener('click', function() {
-  this.classList.toggle('heart-filled');
-});
 
 
 
@@ -163,6 +159,7 @@ xBtn.addEventListener("click", () => {
   sidebarWrapper.classList.remove("sidebar-wrapper-display");
 });
 
+
 // dark-Mode -unfinished
 
 const darkElements1 = document.querySelectorAll(".dark-mode-1");
@@ -213,4 +210,3 @@ for (const followBtn of followBtns) {
     }
   });
 }
-
