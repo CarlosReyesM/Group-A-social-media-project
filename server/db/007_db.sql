@@ -1,0 +1,1 @@
+ALTER TABLE comments ADD timestamp timestamp default current_timestamp;
