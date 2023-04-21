@@ -30,6 +30,7 @@ const parsePosts = (posts) => {
         commentNumber: posts.comments_count,
         retweetNumber: posts.retweets_count,
         favoriteNumber: posts.favorites_count,
+        likeNumber: posts.likes_count,
     };
 };
 exports.tweetsRouter.use((req, res, next) => {
@@ -49,7 +50,8 @@ exports.tweetsRouter.get("/all/:id", (req, res) => {
       i.address as image_address,
       (SELECT COUNT(*) FROM retweets WHERE retweets.tweet_id = t.id) AS retweets_count,
       (SELECT COUNT(*) FROM comments WHERE comments.tweet_id = t.id) AS comments_count,
-      (SELECT COUNT(*) FROM favorites WHERE favorites.tweet_id = t.id) AS favorites_count
+      (SELECT COUNT(*) FROM favorites WHERE favorites.tweet_id = t.id) AS favorites_count,
+      (SELECT COUNT(*) FROM likes WHERE likes.tweet_id = t.id) AS likes_count
       FROM tweets t
       LEFT JOIN users u ON user_id = u.id
       LEFT JOIN images i ON t.id = i.tweet_id
