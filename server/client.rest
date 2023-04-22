@@ -52,3 +52,23 @@ Content-Type: application/json
 ### delete comment
 
 DELETE http://localhost:3001/comments/2
+
+### add like
+
+POST http://localhost:3001/likes
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "tweetId": 1
+}
+
+### remove like
+
+DELETE http://localhost:3001/likes
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "tweetId": 1
+}
