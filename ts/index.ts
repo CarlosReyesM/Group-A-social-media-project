@@ -26,13 +26,33 @@ const sidebarWrapper = <HTMLElement>document.querySelector(".sidebar-wrapper");
 const xBtn = <HTMLElement>document.querySelector(".sidebar-header i");
 const toggle = <HTMLElement>document.querySelector(".toggle");
 const circle = <HTMLElement>document.querySelector(".circle");
-const passwordInput = <HTMLElement>document.getElementById('password'); 
-const passwordToggle =  <HTMLElement>document.querySelector('.password-toggle');
-const inputPost = <HTMLInputElement>document.querySelector('#input__post'); 
-
-
+const passwordInput = <HTMLElement>document.getElementById("password");
+const passwordToggle = <HTMLElement>document.querySelector(".password-toggle");
+const inputPost = <HTMLInputElement>document.querySelector("#input__post");
 
 const postsClass = new Posts();
+
+const goToLoginPage = () => {
+  mainPage.style.display = "none";
+  loginPage.style.display = "grid";
+};
+
+const goToMainPage = () => {
+  mainPage.style.display = "none";
+  newsFeedPage.style.display = "block";
+  postsClass.fetchPosts();
+};
+
+const checkForCredentials = () => {
+  const loggedIn = localStorage.getItem("loggedIn");
+  if (loggedIn) {
+    goToMainPage();
+    return;
+  }
+  goToLoginPage();
+}
+
+checkForCredentials();
 
 /************************************************************ */
 // POST
@@ -49,11 +69,6 @@ btnPost?.addEventListener("click", () => {
   modalWrapper.classList.remove("modal-wrapper-display");
 });
 
-
-
-
-
-
 //Main Page
 
 passwordToggle.addEventListener("click", function () {
@@ -63,10 +78,10 @@ passwordToggle.addEventListener("click", function () {
   passwordToggle.classList.toggle("fa-eye");
 });
 
-const goToLoginPage = () => {
-  mainPage.style.display = "none";
-  loginPage.style.display = "grid";
-};
+const saveCredentials = () => {
+  localStorage.setItem("loggedIn", "true")
+}
+
 
 middleContent.addEventListener("click", (e) => {
   const target = e.target as HTMLDivElement;
@@ -80,9 +95,9 @@ btnTop.addEventListener("click", async () => {
   const inputPassword = <HTMLInputElement>document.querySelector("#password");
 
   if (inputUserInfo.value !== "" && inputPassword.value !== "") {
-    mainPage.style.display = "none";
-    newsFeedPage.style.display = "block";
-    postsClass.fetchPosts();
+    // TODO handle user authentication
+    saveCredentials();
+    goToMainPage();
   } else {
     goToLoginPage();
     loginModal.style.display = "block";
@@ -105,9 +120,8 @@ loginFormBtn.addEventListener("click", () => {
 
   if (loginUserInfo.value !== "" && loginPassword.value !== "") {
     // TODO handle user authentication
-    loginPage.style.display = "none";
-    newsFeedPage.style.display = "block";
-    postsClass.fetchPosts();
+    saveCredentials();
+    goToMainPage();
   } else {
     loginModal.style.display = "block";
   }
@@ -159,7 +173,6 @@ xBtn.addEventListener("click", () => {
   sidebarWrapper.classList.remove("sidebar-wrapper-display");
 });
 
-
 // dark-Mode -unfinished
 
 const darkElements1 = document.querySelectorAll(".dark-mode-1");
@@ -181,32 +194,34 @@ toggle.addEventListener("click", () => {
   Array.from(borders).map((border) => border.classList.toggle("border-color"));
 });
 
-const followBtns = document.querySelectorAll('.follow-btn') as NodeListOf<HTMLButtonElement>;
+const followBtns = document.querySelectorAll(
+  ".follow-btn"
+) as NodeListOf<HTMLButtonElement>;
 
 for (const followBtn of followBtns) {
-  followBtn.addEventListener('click', function() {
-    followBtn.classList.toggle('followed');
+  followBtn.addEventListener("click", function () {
+    followBtn.classList.toggle("followed");
 
-    if (followBtn.classList.contains('followed')) {
-      followBtn.textContent = 'Followed';
-      followBtn.classList.add('unfollowed');
+    if (followBtn.classList.contains("followed")) {
+      followBtn.textContent = "Followed";
+      followBtn.classList.add("unfollowed");
     } else {
-      followBtn.textContent = 'Follow';
-      followBtn.classList.remove('unfollowed');
+      followBtn.textContent = "Follow";
+      followBtn.classList.remove("unfollowed");
     }
   });
 
-  followBtn.addEventListener('mouseenter', function() {
-    if (followBtn.classList.contains('followed')) {
-      followBtn.textContent = 'Unfollow';
-      followBtn.classList.add('unfollowed');
+  followBtn.addEventListener("mouseenter", function () {
+    if (followBtn.classList.contains("followed")) {
+      followBtn.textContent = "Unfollow";
+      followBtn.classList.add("unfollowed");
     }
   });
 
-  followBtn.addEventListener('mouseleave', function() {
-    if (followBtn.classList.contains('followed')) {
-      followBtn.textContent = 'Followed';
-      followBtn.classList.remove('unfollowed');
+  followBtn.addEventListener("mouseleave", function () {
+    if (followBtn.classList.contains("followed")) {
+      followBtn.textContent = "Followed";
+      followBtn.classList.remove("unfollowed");
     }
   });
 }
