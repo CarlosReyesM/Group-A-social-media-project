@@ -826,6 +826,11 @@ body {
   margin: 0 0.7rem;
 }
 
+.follow-footer a:hover {
+  color: #1da1f2;
+  transition: all 0.3s linear;
+}
+
 /* Post Button */
 
 .post-btn {
@@ -1629,9 +1634,7 @@ body {
     
   }
 
-  .settings i {
-    
-  }
+  
 
   .options {
     position: absolute;
