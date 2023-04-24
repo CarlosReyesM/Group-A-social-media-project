@@ -108,11 +108,34 @@ export default class Posts {
         options.style.display = 'block';
         isOptionsVisible = true;
       }
-      
     });
+    
+    const modalWrapper = <HTMLElement>document.querySelector('.modal-wrapper');
+    const modalPost = <HTMLElement>document.querySelector('.modal');
+    const inputPost = <HTMLInputElement>document.getElementById('input__post');
+    editContainer.addEventListener('click', () => {
+      console.log(modalWrapper);
+      console.log(editContainer);
+      modalWrapper.classList.add('modal-wrapper-display');
+      modalPost.style.display = 'block'
+      inputPost.placeholder = post.content;
+    })
+    
+    const deleteWrapper = <HTMLElement>document.querySelector('.delete-wrapper');
+    const deleteNotificationModal = <HTMLElement>document.querySelector('.delete-notification-modal');
+    deleteContainer.addEventListener('click', () => {
+      deleteNotificationModal.style.display = 'block';
+      options.style.display = 'none';
+      deleteWrapper.style.display = 'block';
+    })
 
+    const cancelBtn = <HTMLElement>document.querySelector('.cancelBtn');
+    cancelBtn.addEventListener('click', () => {
+      deleteNotificationModal.style.display = 'none';
+      deleteWrapper.style.display = 'none';
+    })
 
-
+    
     
     const postText = createElement<HTMLParagraphElement>(
       "p",
@@ -280,6 +303,8 @@ export default class Posts {
     posts.forEach((post) => postElement.appendChild(this.buildPost(post)));
   };
 }
+
+
 
 
 

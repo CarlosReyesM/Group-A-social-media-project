@@ -111,6 +111,7 @@ loginFormBtn.addEventListener("click", () => {
 postBtn.addEventListener("click", () => {
     modal.style.display = "block";
     modalWrapper.classList.add("modal-wrapper-display");
+    inputPost.placeholder = "What's happening?";
     if (modalInput.value !== "") {
         modalInput.value = "";
         changeOpacity(0.5);

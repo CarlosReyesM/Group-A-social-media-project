@@ -9,6 +9,7 @@ export interface Post {
   commentNumber: string;
   retweetNumber: string;
   favoriteNumber: string;
+  likeNumber: string;
 }
 
 export interface QueryPosts {
@@ -22,4 +23,6 @@ export interface QueryPosts {
   retweets_count: string;
   comments_count: string;
   favorites_count: string;
+  likes_count: string;
+
 }
