@@ -19,7 +19,8 @@ const parsePosts = (posts: QueryPosts): Post => {
       new Date()
     ),
     content: posts.content,
-    image: posts.image_address || "",
+    // TODO ADD ENV variables to the path
+    image: posts.image_address ? `http://localhost:3001${posts.image_address}` : "",
     commentNumber: posts.comments_count,
     retweetNumber: posts.retweets_count,
     favoriteNumber: posts.favorites_count,
@@ -91,11 +92,10 @@ tweetsRouter.post("/", async (req: Request, res: Response) => {
       if (!file) {
         return tweetId;
       }
-
       file.mv(path.resolve(`./public/images/${file.name}`), (err)=> {
         if (err) {
           console.log(err);
-          throw new Error(err);
+          return new Error(err);
         } 
       })
 

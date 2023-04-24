@@ -33,6 +33,7 @@ const circle = document.querySelector(".circle");
 const passwordInput = document.getElementById("password");
 const passwordToggle = document.querySelector(".password-toggle");
 const inputPost = document.querySelector("#input__post");
+const modalInputImage = document.querySelector("#modal-post-image");
 const postsClass = new Posts();
 const goToLoginPage = () => {
     mainPage.style.display = "none";
@@ -57,8 +58,9 @@ checkForCredentials();
 const btnPost = document.getElementById("btn__post");
 btnPost === null || btnPost === void 0 ? void 0 : btnPost.addEventListener("click", () => {
     const contentInputPost = inputPost.value;
-    console.log(contentInputPost);
-    postsClass.createPost(contentInputPost);
+    const contentImage = modalInputImage.files ? modalInputImage.files[0] : null;
+    console.log(contentImage);
+    postsClass.createPost(contentInputPost, contentImage);
     modal.style.display = "none";
     modalWrapper.classList.remove("modal-wrapper-display");
 });

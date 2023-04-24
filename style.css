@@ -1834,7 +1834,13 @@ body {
     display: table;
   }
 
-  
+  .icon-label {
+    cursor: pointer;
+  }
 
-
-  
+  .hidden-input {
+    position: absolute;
+    left: 3000px;
+    top: 3000px;
+    opacity: 1;
+  }

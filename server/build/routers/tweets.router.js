@@ -26,7 +26,8 @@ const parsePosts = (posts) => {
         avatar: posts.avatar,
         time: (0, formatDistance_1.default)(posts.timestamp ? new Date(posts.timestamp) : new Date(), new Date()),
         content: posts.content,
-        image: posts.image_address || "",
+        // TODO ADD ENV variables to the path
+        image: posts.image_address ? `http://localhost:3001${posts.image_address}` : "",
         commentNumber: posts.comments_count,
         retweetNumber: posts.retweets_count,
         favoriteNumber: posts.favorites_count,
@@ -91,7 +92,7 @@ exports.tweetsRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
         file.mv(path_1.default.resolve(`./public/images/${file.name}`), (err) => {
             if (err) {
                 console.log(err);
-                throw new Error(err);
+                return new Error(err);
             }
         });
         yield client.query("insert into images (address, name, tweet_id, user_id) values ($1, $2, $3, $4)", [`/images/${file.name}`, file.name, tweetId, userId]);

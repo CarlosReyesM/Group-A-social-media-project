@@ -29,6 +29,7 @@ const circle = <HTMLElement>document.querySelector(".circle");
 const passwordInput = <HTMLElement>document.getElementById("password");
 const passwordToggle = <HTMLElement>document.querySelector(".password-toggle");
 const inputPost = <HTMLInputElement>document.querySelector("#input__post");
+const modalInputImage = <HTMLInputElement>document.querySelector("#modal-post-image")
 
 const postsClass = new Posts();
 
@@ -61,9 +62,11 @@ const btnPost = <HTMLElement>document.getElementById("btn__post");
 
 btnPost?.addEventListener("click", () => {
   const contentInputPost = inputPost.value;
-  console.log(contentInputPost);
+  const contentImage = modalInputImage.files ? modalInputImage.files[0] : null;
 
-  postsClass.createPost(contentInputPost);
+  console.log(contentImage);
+
+  postsClass.createPost(contentInputPost, contentImage);
 
   modal.style.display = "none";
   modalWrapper.classList.remove("modal-wrapper-display");
