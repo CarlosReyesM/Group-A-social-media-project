@@ -14,7 +14,7 @@ Content-Type: application/json
 
 ### delete tweet
 
-DELETE http://localhost:3001/tweets/50
+DELETE http://localhost:3001/tweets/28
 
 ### update tweet
 

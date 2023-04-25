@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import Posts from "./classes/posts.js";
+import { MAIN_URL } from "./constants.js";
 //DOM Elements
 const mainPage = document.querySelector(".main-page");
 const loginPage = document.querySelector(".login-page");
@@ -59,7 +60,6 @@ const btnPost = document.getElementById("btn__post");
 btnPost === null || btnPost === void 0 ? void 0 : btnPost.addEventListener("click", () => {
     const contentInputPost = inputPost.value;
     const contentImage = modalInputImage.files ? modalInputImage.files[0] : null;
-    console.log(contentImage);
     postsClass.createPost(contentInputPost, contentImage);
     modal.style.display = "none";
     modalWrapper.classList.remove("modal-wrapper-display");
@@ -184,3 +184,32 @@ for (const followBtn of followBtns) {
         }
     });
 }
+const deleteBtns = document.querySelectorAll('.deletebtn');
+deleteBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        console.log(postsClass.deletedPostID);
+        const tweetId = postsClass.deletedPostID;
+        fetch(`${MAIN_URL}/tweets/${tweetId}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error ${response.status}`);
+            }
+            return response.json();
+        })
+            .then(data => {
+            const postElement = document.querySelector(`.post[data-id="${tweetId}"]`);
+            if (postElement) {
+                postElement.remove();
+                console.log(`Post with ID ${tweetId} deleted successfully`);
+            }
+            else {
+                console.error(`Post with ID ${tweetId} not found`);
+            }
+        })
+            .catch(error => {
+            console.error('Error deleting post:', error);
+        });
+    });
+});

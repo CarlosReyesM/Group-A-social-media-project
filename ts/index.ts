@@ -1,4 +1,5 @@
 import Posts from "./classes/posts.js";
+import { MAIN_URL } from "./constants.js";
 
 //DOM Elements
 const mainPage = <HTMLElement>document.querySelector(".main-page");
@@ -13,12 +14,8 @@ const postBtn = <HTMLElement>document.querySelector(".post-btn");
 const modalWrapper = <HTMLElement>document.querySelector(".modal-wrapper");
 const modal = <HTMLElement>document.querySelector(".modal");
 const postModalX = <HTMLElement>document.querySelector(".modal-header i");
-const modalPostBtn = <HTMLElement>(
-  document.querySelector(".modal-header button")
-);
-const modalFooterPlus = <HTMLElement>(
-  document.querySelector(".modal-footer span")
-);
+const modalPostBtn = <HTMLButtonElement>(document.querySelector(".modal-header button"));
+const modalFooterPlus = <HTMLElement>(document.querySelector(".modal-footer span"));
 const modalInput = <HTMLInputElement>document.querySelector(".modal-input");
 const user = <HTMLElement>document.querySelector(".user");
 const sidebar = <HTMLElement>document.querySelector(".sidebar");
@@ -63,8 +60,6 @@ const btnPost = <HTMLElement>document.getElementById("btn__post");
 btnPost?.addEventListener("click", () => {
   const contentInputPost = inputPost.value;
   const contentImage = modalInputImage.files ? modalInputImage.files[0] : null;
-
-  console.log(contentImage);
 
   postsClass.createPost(contentInputPost, contentImage);
 
@@ -227,4 +222,44 @@ for (const followBtn of followBtns) {
       followBtn.classList.remove("unfollowed");
     }
   });
+
+
+
 }
+
+const deleteBtns = document.querySelectorAll('.deletebtn');
+
+deleteBtns.forEach((btn) => {
+  btn.addEventListener('click', (e: Event) => {
+    console.log(postsClass.deletedPostID);
+    const tweetId = postsClass.deletedPostID; 
+    
+    fetch(`${MAIN_URL}/tweets/${tweetId}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+      
+      return response.json();
+    })
+    .then(data => {
+      const postElement = document.querySelector(`.post[data-id="${tweetId}"]`);
+      if (postElement) {
+        postElement.remove();
+        console.log(`Post with ID ${tweetId} deleted successfully`);
+      } else {
+        console.error(`Post with ID ${tweetId} not found`);
+      }
+    })
+    .catch(error => {
+      console.error('Error deleting post:', error);
+    });
+  });
+});
+
+
+
+
+

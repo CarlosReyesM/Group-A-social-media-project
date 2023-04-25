@@ -1,13 +1,14 @@
 import { MAIN_URL } from "../constants.js";
 import { createElement, textNode } from "../helpers/documentHelper.js";
 import { Post } from "../interfaces/post.js";
-
 const postElement = <HTMLElement>document.querySelector(".posts");
 
 export default class Posts {
   constructor() {}
 
   posts: Post[] = [];
+  deletedPostID: number | null = null;
+  editedPostID: number | null = null;
 
   async fetchPosts() {
     // TODO get user id from JWT
@@ -22,7 +23,7 @@ export default class Posts {
       console.error(error);
     }
   }
-
+  
   async createPost(content: string, image: File | null) {
     // TODO get user id from JWT
     const userId = 1;
@@ -47,6 +48,7 @@ export default class Posts {
 
   buildPost(post: Post) {
     const container = createElement<HTMLDivElement>("div", "post border");
+    container.dataset.id = post.tweetId;
     const userAvatar = createElement<HTMLDivElement>("div", "user-avatar");
     userAvatar.className = "user-avatar";
     const avatarImage = createElement<HTMLImageElement>("img");
@@ -79,6 +81,7 @@ export default class Posts {
       "div",
       "edit-container"
     );
+    editContainer.dataset.id = post.tweetId;
     const editOption = createElement<HTMLDivElement>("div", "option-text");
     editOption.textContent = "Edit Post";
     const editIcon = createElement<HTMLDivElement>("i", "fa-solid fa-gear");
@@ -114,11 +117,10 @@ export default class Posts {
     const modalPost = <HTMLElement>document.querySelector(".modal");
     const inputPost = <HTMLInputElement>document.getElementById("input__post");
     editContainer.addEventListener("click", () => {
-      console.log(modalWrapper);
-      console.log(editContainer);
       modalWrapper.classList.add("modal-wrapper-display");
       modalPost.style.display = "block";
       inputPost.placeholder = post.content;
+      this.editedPostID = parseInt(post.tweetId);
     });
 
     const deleteWrapper = <HTMLElement>(
@@ -131,13 +133,32 @@ export default class Posts {
       deleteNotificationModal.style.display = "block";
       options.style.display = "none";
       deleteWrapper.style.display = "block";
+      this.deletedPostID = parseInt(post.tweetId);
+      console.log(this.deletedPostID);
     });
 
     const cancelBtn = <HTMLElement>document.querySelector(".cancelBtn");
     cancelBtn.addEventListener("click", () => {
       deleteNotificationModal.style.display = "none";
       deleteWrapper.style.display = "none";
+      this.deletedPostID = null;
     });
+
+
+    const deleteBtn = <HTMLElement>document.querySelector(".deletebtn");
+    deleteBtn.addEventListener("click", () => {
+      deleteNotificationModal.style.display = "none";
+      deleteWrapper.style.display = "none";
+      this.deletedPostID = null;
+    });
+
+    
+    
+    
+
+    
+    
+    
 
     const postText = createElement<HTMLParagraphElement>(
       "p",
@@ -302,4 +323,10 @@ export default class Posts {
   renderPost = (posts: Post[]) => {
     posts.forEach((post) => postElement.appendChild(this.buildPost(post)));
   };
+
+
+
+  
 }
+
+

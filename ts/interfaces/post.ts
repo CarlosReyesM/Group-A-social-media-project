@@ -1,5 +1,5 @@
 export interface Post {
-  id: string;
+  tweetId: string;
   author: string;
   nametag: string;
   avatar: string;
