@@ -27,7 +27,10 @@ const parsePosts = (posts) => {
         time: (0, formatDistance_1.default)(posts.timestamp ? new Date(posts.timestamp) : new Date(), new Date()),
         content: posts.content,
         // TODO ADD ENV variables to the path
-        image: posts.image_address ? `http://localhost:3001${posts.image_address}` : "",
+        image: posts.image_address
+            ? `http://localhost:3001${posts.image_address}`
+            : "",
+        favoriteId: posts.favorite_id,
         commentNumber: posts.comments_count,
         retweetNumber: posts.retweets_count,
         favoriteNumber: posts.favorites_count,
@@ -49,6 +52,7 @@ exports.tweetsRouter.get("/all/:id", (req, res) => {
       u.name_tag,
       u.avatar,
       i.address as image_address,
+      f.id as favorite_id,
       (SELECT COUNT(*) FROM retweets WHERE retweets.tweet_id = t.id) AS retweets_count,
       (SELECT COUNT(*) FROM comments WHERE comments.tweet_id = t.id) AS comments_count,
       (SELECT COUNT(*) FROM favorites WHERE favorites.tweet_id = t.id) AS favorites_count,
@@ -56,6 +60,7 @@ exports.tweetsRouter.get("/all/:id", (req, res) => {
       FROM tweets t
       LEFT JOIN users u ON user_id = u.id
       LEFT JOIN images i ON t.id = i.tweet_id
+      LEFT JOIN favorites f ON f.user_id = t.user_id AND f.tweet_id = t.id
       WHERE t.user_id = $1
       ORDER By t.timestamp DESC;
   `, [userId], (error, result) => {
@@ -109,12 +114,14 @@ exports.tweetsRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
     u.name_tag,
     u.avatar,
     i.address as image_address,
+    f.id as favorite_id
     (SELECT COUNT(*) FROM retweets WHERE retweets.tweet_id = t.id) AS retweets_count,
     (SELECT COUNT(*) FROM comments WHERE comments.tweet_id = t.id) AS comments_count,
     (SELECT COUNT(*) FROM favorites WHERE favorites.tweet_id = t.id) AS favorites_count
     FROM tweets t
     LEFT JOIN users u ON user_id = u.id
     LEFT JOIN images i ON t.id = i.tweet_id
+    LEFT JOIN favorites f ON f.user_id = t.user_id AND f.tweet_id = t.id
     WHERE t.id = $1;
 `, [tweetId]);
         res.status(200).json(newPostRows.rows.map((r) => parsePosts(r)));
@@ -126,7 +133,7 @@ exports.tweetsRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
     })
         .finally(() => client.release());
 }));
-exports.tweetsRouter.delete('/:id', (req, res) => {
+exports.tweetsRouter.delete("/:id", (req, res) => {
     const tweetId = req.params.id;
     const pool = (0, database_1.openDb)();
     pool.query("DELETE FROM tweets WHERE id = $1", [tweetId], (error, result) => {
@@ -137,7 +144,7 @@ exports.tweetsRouter.delete('/:id', (req, res) => {
         res.status(200).json({ id: tweetId });
     });
 });
-exports.tweetsRouter.put('/:id', (req, res) => {
+exports.tweetsRouter.put("/:id", (req, res) => {
     const tweetId = req.params.id;
     const content = req.body.tweet;
     const pool = (0, database_1.openDb)();

@@ -22,12 +22,13 @@ exports.likesRouter.use((req, res, next) => {
 exports.likesRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.body.userId;
     const tweetId = req.body.tweetId;
+    console.log(req.body);
     if (!userId || !tweetId) {
         res.status(400).json({ error: "bad request" });
         return;
     }
     const pool = (0, database_1.openDb)();
-    pool.query("SELECT COUNT(*) as count FROM likes WHERE user_id = $1 AND tweet_id = $2", [userId, tweetId], (err, response) => {
+    pool.query("SELECT COUNT(*) as count FROM favorites WHERE user_id = $1 AND tweet_id = $2", [userId, tweetId], (err, response) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -37,24 +38,33 @@ exports.likesRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, fu
             res.status(400).json({ error: "already liked" });
             return;
         }
-        pool.query("INSERT into likes (user_id, tweet_id) values ($1, $2) returning id", [userId, tweetId], (err, _) => {
+        pool.query("INSERT into favorites (user_id, tweet_id) values ($1, $2) returning id", [userId, tweetId], (err, response) => {
             if (err) {
                 res.status(500).json({ error: err.message });
                 return;
             }
-            res.status(200).json({ id: tweetId });
+            res.status(200).json(response.rows[0]);
         });
     });
 }));
-exports.likesRouter.delete("/", (req, res) => {
-    const userId = req.body.userId;
-    const tweetId = req.body.tweetId;
+exports.likesRouter.delete("/:id", (req, res) => {
+    const id = req.params.id;
     const pool = (0, database_1.openDb)();
-    pool.query("DELETE FROM likes WHERE user_id = $1 AND tweet_id = $2", [userId, tweetId], (error, _) => {
+    pool.query("SELECT FROM favorites WHERE id = $1", [id], (error, response) => {
         if (error) {
             res.status(500).json({ error: error });
             return;
         }
-        res.status(200).json({ id: tweetId });
+        if (!response.rows.length) {
+            res.status(400).json({ error: "favorite id not found" });
+            return;
+        }
+        pool.query("DELETE FROM favorites WHERE id = $1", [id], (error, _) => {
+            if (error) {
+                res.status(500).json({ error: error });
+                return;
+            }
+            res.status(200).json({ id });
+        });
     });
 });

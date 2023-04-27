@@ -6,6 +6,7 @@ export interface Post {
   time: string;
   content: string;
   image: string;
+  favoriteId: number | null;
   commentNumber: string;
   retweetNumber: string;
   favoriteNumber: string;

@@ -23,7 +23,7 @@ export default class Posts {
       console.error(error);
     }
   }
-  
+
   async createPost(content: string, image: File | null) {
     // TODO get user id from JWT
     const userId = 1;
@@ -44,6 +44,38 @@ export default class Posts {
         console.error(error);
         return [];
       });
+  }
+
+  async giveFavorite(tweetId: number): Promise<{ id: number }> {
+    const body = {
+      userId: 1,
+      tweetId,
+    };
+    const likeId = await fetch(`${MAIN_URL}/likes`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body),
+    })
+      .then((result) => result.json())
+      .then((response) => response)
+      .catch((error) => {
+        console.error(error);
+      });
+    return likeId;
+  }
+
+  async deleteFavorite(tweetId: string): Promise<{ id: number }> {
+    const deletedLikeId = await fetch(`${MAIN_URL}/likes/${tweetId}`, {
+      method: "delete",
+    })
+      .then((result) => result.json())
+      .then((response) => response)
+      .catch((error) => {
+        console.error(error);
+      });
+    return deletedLikeId;
   }
 
   buildPost(post: Post) {
@@ -144,21 +176,12 @@ export default class Posts {
       this.deletedPostID = null;
     });
 
-
     const deleteBtn = <HTMLElement>document.querySelector(".deletebtn");
     deleteBtn.addEventListener("click", () => {
       deleteNotificationModal.style.display = "none";
       deleteWrapper.style.display = "none";
       this.deletedPostID = null;
     });
-
-    
-    
-    
-
-    
-    
-    
 
     const postText = createElement<HTMLParagraphElement>(
       "p",
@@ -229,24 +252,46 @@ export default class Posts {
     );
     const favoriteCount = textNode(post.favoriteNumber);
     favoriteNumberContainer.appendChild(favoriteCount);
-    let isFavorited = false;
+    if (post.favoriteId) {
+      favoriteIcon.dataset.favoriteId = String(post.favoriteId);
+      favoriteIcon.classList.remove("far");
+      favoriteIcon.classList.add("fas");
+      favorite.style.color = "red";
+    }
 
-    favorite.addEventListener("click", () => {
-      isFavorited = !isFavorited;
-      if (isFavorited) {
-        favoriteIcon.classList.remove("far");
-        favoriteIcon.classList.add("fas");
-        favorite.style.color = "red";
-        favoriteCount.textContent = String(
-          parseInt(favoriteCount.textContent || "0") + 1
-        );
+    favorite.addEventListener("click", async () => {
+      if (!favoriteIcon.dataset.favoriteId) {
+        const favoriteId = await this.giveFavorite(parseInt(post.tweetId, 10));
+        if (favoriteId.id) {
+          const postIndex = this.posts.findIndex(
+            (p) => p.tweetId === post.tweetId
+          );
+          this.posts[postIndex].favoriteId = favoriteId.id;
+          this.posts[postIndex].favoriteNumber = String(
+            parseInt(this.posts[postIndex].favoriteNumber, 10) + 1
+          );
+          favoriteIcon.dataset.favoriteId = String(favoriteId.id);
+          favoriteIcon.classList.remove("far");
+          favoriteIcon.classList.add("fas");
+          favorite.style.color = "red";
+          favoriteCount.textContent = this.posts[postIndex].favoriteNumber;
+        }
       } else {
-        favoriteIcon.classList.remove("fas");
-        favoriteIcon.classList.add("far");
-        favorite.style.color = "#8899a6";
-        favoriteCount.textContent = String(
-          parseInt(favoriteCount.textContent || "0") - 1
-        );
+        const deletedFavorite = await this.deleteFavorite(favoriteIcon.dataset.favoriteId);
+        if (deletedFavorite.id) {
+          const postIndex = this.posts.findIndex(
+            (p) => p.tweetId === post.tweetId
+          );
+          this.posts[postIndex].favoriteId = null;
+          this.posts[postIndex].favoriteNumber = String(
+            parseInt(this.posts[postIndex].favoriteNumber, 10) - 1
+          );
+          delete favoriteIcon.dataset.favoriteId;
+          favoriteIcon.classList.remove("fas");
+          favoriteIcon.classList.add("far");
+          favorite.style.color = "#8899a6";
+          favoriteCount.textContent = this.posts[postIndex].favoriteNumber;
+        }
       }
     });
 
@@ -323,10 +368,4 @@ export default class Posts {
   renderPost = (posts: Post[]) => {
     posts.forEach((post) => postElement.appendChild(this.buildPost(post)));
   };
-
-
-
-  
 }
-
-

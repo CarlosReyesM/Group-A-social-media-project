@@ -60,15 +60,9 @@ Content-Type: application/json
 
 {
   "userId": 1,
-  "tweetId": 1
+  "tweetId": 64
 }
 
 ### remove like
 
-DELETE http://localhost:3001/likes
-Content-Type: application/json
-
-{
-  "userId": 1,
-  "tweetId": 1
-}
+DELETE http://localhost:3001/likes/3

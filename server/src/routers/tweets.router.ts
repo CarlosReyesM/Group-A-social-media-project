@@ -20,7 +20,10 @@ const parsePosts = (posts: QueryPosts): Post => {
     ),
     content: posts.content,
     // TODO ADD ENV variables to the path
-    image: posts.image_address ? `http://localhost:3001${posts.image_address}` : "",
+    image: posts.image_address
+      ? `http://localhost:3001${posts.image_address}`
+      : "",
+    favoriteId: posts.favorite_id,
     commentNumber: posts.comments_count,
     retweetNumber: posts.retweets_count,
     favoriteNumber: posts.favorites_count,
@@ -45,6 +48,7 @@ tweetsRouter.get("/all/:id", (req: Request, res: Response) => {
       u.name_tag,
       u.avatar,
       i.address as image_address,
+      f.id as favorite_id,
       (SELECT COUNT(*) FROM retweets WHERE retweets.tweet_id = t.id) AS retweets_count,
       (SELECT COUNT(*) FROM comments WHERE comments.tweet_id = t.id) AS comments_count,
       (SELECT COUNT(*) FROM favorites WHERE favorites.tweet_id = t.id) AS favorites_count,
@@ -52,6 +56,7 @@ tweetsRouter.get("/all/:id", (req: Request, res: Response) => {
       FROM tweets t
       LEFT JOIN users u ON user_id = u.id
       LEFT JOIN images i ON t.id = i.tweet_id
+      LEFT JOIN favorites f ON f.user_id = t.user_id AND f.tweet_id = t.id
       WHERE t.user_id = $1
       ORDER By t.timestamp DESC;
   `,
@@ -92,12 +97,12 @@ tweetsRouter.post("/", async (req: Request, res: Response) => {
       if (!file) {
         return tweetId;
       }
-      file.mv(path.resolve(`./public/images/${file.name}`), (err)=> {
+      file.mv(path.resolve(`./public/images/${file.name}`), (err) => {
         if (err) {
           console.log(err);
           return new Error(err);
-        } 
-      })
+        }
+      });
 
       await client.query(
         "insert into images (address, name, tweet_id, user_id) values ($1, $2, $3, $4)",
@@ -117,12 +122,14 @@ tweetsRouter.post("/", async (req: Request, res: Response) => {
     u.name_tag,
     u.avatar,
     i.address as image_address,
+    f.id as favorite_id
     (SELECT COUNT(*) FROM retweets WHERE retweets.tweet_id = t.id) AS retweets_count,
     (SELECT COUNT(*) FROM comments WHERE comments.tweet_id = t.id) AS comments_count,
     (SELECT COUNT(*) FROM favorites WHERE favorites.tweet_id = t.id) AS favorites_count
     FROM tweets t
     LEFT JOIN users u ON user_id = u.id
     LEFT JOIN images i ON t.id = i.tweet_id
+    LEFT JOIN favorites f ON f.user_id = t.user_id AND f.tweet_id = t.id
     WHERE t.id = $1;
 `,
         [tweetId]
@@ -137,7 +144,7 @@ tweetsRouter.post("/", async (req: Request, res: Response) => {
     .finally(() => client.release());
 });
 
-tweetsRouter.delete('/:id', (req: Request, res: Response) => {
+tweetsRouter.delete("/:id", (req: Request, res: Response) => {
   const tweetId = req.params.id;
   const pool = openDb();
   pool.query(
@@ -148,12 +155,12 @@ tweetsRouter.delete('/:id', (req: Request, res: Response) => {
         res.status(500).json({ error: error });
         return;
       }
-      res.status(200).json({id: tweetId});
+      res.status(200).json({ id: tweetId });
     }
   );
 });
 
-tweetsRouter.put('/:id', (req: Request, res: Response) => {
+tweetsRouter.put("/:id", (req: Request, res: Response) => {
   const tweetId = req.params.id;
   const content = req.body.tweet;
   const pool = openDb();

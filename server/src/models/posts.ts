@@ -6,6 +6,7 @@ export interface Post {
   content: string;
   avatar: string;
   image: string;
+  favoriteId: number | null;
   commentNumber: string;
   retweetNumber: string;
   favoriteNumber: string;
@@ -20,6 +21,7 @@ export interface QueryPosts {
   name_tag: string |  null;
   avatar: string;
   image_address: string |  null;
+  favorite_id: number | null;
   retweets_count: string;
   comments_count: string;
   favorites_count: string;
