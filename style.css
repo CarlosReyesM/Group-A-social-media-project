@@ -631,10 +631,22 @@ body {
 }
 
 .post {
-  display: flex;
+  
   padding: 1.5rem;
   border-bottom: 0.1rem solid #eee;
   position: relative;
+}
+.post-container {
+  display: flex;
+}
+
+.comment-post {
+  display: flex;
+  padding: 12px 0px;
+  padding-left: 30px;
+  border-radius: 4px;
+  margin: 10px 0px;
+  background-color: #F0F0F0;
 }
 
 .post-content {

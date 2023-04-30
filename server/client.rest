@@ -36,7 +36,7 @@ Content-Type: application/json
 
 {
   "userId": 1,
-  "tweetId": 49,
+  "tweetId": 23,
   "content": "some comment for tweet 49"
 }
 

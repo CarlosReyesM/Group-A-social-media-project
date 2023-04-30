@@ -11,3 +11,13 @@ export interface Post {
   retweetNumber: string;
   favoriteNumber: string;
 }
+
+export interface Comment {
+  id: number;
+  content: string;
+  userId: number;
+  tweetId: number;
+  timestamp: string;
+  userName: string;
+  userAvatar: string | null;
+}

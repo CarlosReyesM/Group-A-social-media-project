@@ -1,12 +1,13 @@
 import { MAIN_URL } from "../constants.js";
 import { createElement, textNode } from "../helpers/documentHelper.js";
-import { Post } from "../interfaces/post.js";
+import { Post, Comment } from "../interfaces/post.js";
 const postElement = <HTMLElement>document.querySelector(".posts");
 
 export default class Posts {
   constructor() {}
 
   posts: Post[] = [];
+  comments: Comment[] = [];
   deletedPostID: number | null = null;
   editedPostID: number | null = null;
 
@@ -19,6 +20,20 @@ export default class Posts {
       ).then((result) => result.json());
       this.posts = posts;
       this.renderPost(posts);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async fetchComments(tweetId: string) {
+    // TODO get user id from JWT
+    const userId = 1;
+    try {
+      const comments: Comment[] = await fetch(
+        `${MAIN_URL}/comments/?tweetId=${tweetId}`
+      ).then((result) => result.json());
+      this.comments = comments;
+      this.renderComments(comments);
     } catch (error) {
       console.error(error);
     }
@@ -54,7 +69,7 @@ export default class Posts {
     const likeId = await fetch(`${MAIN_URL}/likes`, {
       method: "post",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     })
@@ -78,9 +93,60 @@ export default class Posts {
     return deletedLikeId;
   }
 
+  buildComment(comment: Comment) {
+    const commentsContainer = <HTMLInputElement>(
+      document.getElementById(`comments-${comment.tweetId}`)
+    );
+
+    const commentPost = createElement<HTMLDivElement>(
+      "div",
+      "comment-post",
+      `comment-${comment.id}`
+    );
+
+    // avatar
+    const userAvatar = createElement<HTMLDivElement>("div", "user-avatar");
+    userAvatar.className = "user-avatar";
+    const avatarImage = createElement<HTMLImageElement>("img");
+    avatarImage.src = comment.userAvatar || "images/user1.jpg";
+    userAvatar.appendChild(avatarImage);
+
+    // post
+    const postContent = createElement<HTMLDivElement>("div", "post-content");
+    const postUserInfo = createElement<HTMLDivElement>(
+      "div",
+      "post-user-info light-text"
+    );
+    const author = createElement<HTMLHeadingElement>("h4");
+    const authorName = textNode(comment.userName);
+    author.appendChild(authorName);
+    const nameTag = createElement<HTMLSpanElement>("span");
+    const tagAndTimeText = textNode(`. ${comment.timestamp}`);
+    nameTag.appendChild(tagAndTimeText);
+    postUserInfo.append(author, nameTag);
+
+    // content
+    const postText = createElement<HTMLParagraphElement>(
+      "p",
+      "post-text light-text"
+    );
+    const postTextContent = textNode(comment.content);
+    postText.appendChild(postTextContent);
+    postContent.append(postUserInfo, postText);
+
+    commentPost.append(userAvatar, postContent);
+
+    commentsContainer.append(commentPost);
+  }
+
   buildPost(post: Post) {
     const container = createElement<HTMLDivElement>("div", "post border");
     container.dataset.id = post.tweetId;
+    const postContainer = createElement<HTMLDivElement>(
+      "div",
+      "post-container"
+    );
+
     const userAvatar = createElement<HTMLDivElement>("div", "user-avatar");
     userAvatar.className = "user-avatar";
     const avatarImage = createElement<HTMLImageElement>("img");
@@ -213,7 +279,27 @@ export default class Posts {
     const commentCount = textNode(post.commentNumber);
     commentNumberContainer.appendChild(commentCount);
 
-    comments.addEventListener("click", function () {});
+    let showComment = false;
+
+    // comment
+    let commentsContainer: HTMLDivElement | null = null;
+    comments.addEventListener("click", async () => {
+      if (post.commentNumber !== "0") {
+        if (!showComment) {
+          commentsContainer = createElement<HTMLDivElement>(
+            "div",
+            "comments",
+            `comments-${post.tweetId}`
+          );
+          container.append(commentsContainer);
+          await this.fetchComments(post.tweetId);
+        } else {
+          commentsContainer?.remove();
+        }
+        showComment = !showComment;
+      }
+    });
+    
 
     const retweet = createElement<HTMLDivElement>("div", "retweet");
     const retweetIcon = createElement<HTMLDivElement>("i", "fas fa-retweet");
@@ -277,7 +363,9 @@ export default class Posts {
           favoriteCount.textContent = this.posts[postIndex].favoriteNumber;
         }
       } else {
-        const deletedFavorite = await this.deleteFavorite(favoriteIcon.dataset.favoriteId);
+        const deletedFavorite = await this.deleteFavorite(
+          favoriteIcon.dataset.favoriteId
+        );
         if (deletedFavorite.id) {
           const postIndex = this.posts.findIndex(
             (p) => p.tweetId === post.tweetId
@@ -361,11 +449,16 @@ export default class Posts {
     externalLink.append(externalLinkIcon, externalLinkContainer);
     contentAction.append(comments, retweet, favorite, externalLink);
     postContent.append(contentAction);
-    container.append(userAvatar, postContent, settings);
+    postContainer.append(userAvatar, postContent, settings);
+    container.append(postContainer);
     return container;
   }
 
   renderPost = (posts: Post[]) => {
     posts.forEach((post) => postElement.appendChild(this.buildPost(post)));
+  };
+
+  renderComments = (comments: Comment[]) => {
+    comments.forEach((comment) => this.buildComment(comment));
   };
 }
