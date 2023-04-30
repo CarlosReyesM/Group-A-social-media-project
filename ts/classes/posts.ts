@@ -193,10 +193,13 @@ export default class Posts {
       const replyMessage = commentInput.value.trim();
       disableButton({ disable: replyMessage.length == 0 });
     });
+
     commentPostButton.addEventListener("click", async () => {
       const replyMessage = commentInput.value.trim();
       if (replyMessage.length > 0) {
         await this.createComment(replyMessage, post.tweetId);
+        commentInput.value = "";
+        disableButton({ disable: true });
       }
     });
 
