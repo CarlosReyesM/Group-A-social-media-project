@@ -114,7 +114,7 @@ exports.tweetsRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
     u.name_tag,
     u.avatar,
     i.address as image_address,
-    f.id as favorite_id
+    f.id as favorite_id,
     (SELECT COUNT(*) FROM retweets WHERE retweets.tweet_id = t.id) AS retweets_count,
     (SELECT COUNT(*) FROM comments WHERE comments.tweet_id = t.id) AS comments_count,
     (SELECT COUNT(*) FROM favorites WHERE favorites.tweet_id = t.id) AS favorites_count
