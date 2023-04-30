@@ -62,7 +62,7 @@ exports.tweetsRouter.get("/all/:id", (req, res) => {
       LEFT JOIN images i ON t.id = i.tweet_id
       LEFT JOIN favorites f ON f.user_id = t.user_id AND f.tweet_id = t.id
       WHERE t.user_id = $1
-      ORDER By t.timestamp DESC;
+      ORDER By t.timestamp;
   `, [userId], (error, result) => {
         if (error) {
             res.status(500).json({ error: error });

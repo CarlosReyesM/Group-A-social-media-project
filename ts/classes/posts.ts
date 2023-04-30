@@ -455,7 +455,7 @@ export default class Posts {
   }
 
   renderPost = (posts: Post[]) => {
-    posts.forEach((post) => postElement.appendChild(this.buildPost(post)));
+    posts.forEach((post) => postElement.prepend(this.buildPost(post)));
   };
 
   renderComments = (comments: Comment[]) => {
