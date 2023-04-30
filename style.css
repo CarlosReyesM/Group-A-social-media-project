@@ -642,8 +642,7 @@ body {
 
 .comments-container .comments .comment-post {
   display: flex;
-  padding: 12px 0px;
-  padding-left: 30px;
+  padding: 12px 10px;
   border-radius: 4px;
   margin: 10px 0px;
   background-color: #F0F0F0;
@@ -659,7 +658,7 @@ body {
 }
 
 .comments-container .add-comment .add-comment-input {
-  padding: 1rem 0 10rem 1rem;
+  padding: 1rem 0 5rem 1rem;
   background-color: #d6e1e9;
   border: 0.1rem solid #eee;
   border-radius: 1.5rem;
@@ -1700,12 +1699,12 @@ body {
     display: flex;
   }
 
-  .edit-container {
+  .edit-container, .comment-edit-container {
     padding: 10px;
     border-bottom: 1px solid #cccccc;
   }
 
-  .delete-container {
+  .delete-container, .comment-delete-container {
     padding:  10px;
     color: rgb(255, 0, 0);
   }
@@ -1779,7 +1778,7 @@ body {
 
 
 
-  .delete-wrapper {
+  .delete-wrapper, .comment-delete-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -1806,7 +1805,7 @@ body {
   }
   
   /* Float cancel and delete buttons and add an equal width */
-  .cancelBtn, .deletebtn {
+  .cancelBtn, .deletebtn, .commentCancelBtn, .commentDeletebtn {
     float: left;
     width: 48%;
     height: 40px;
@@ -1815,48 +1814,48 @@ body {
     font-size: 1.6rem;
   }
   
-  .delete-notification h1 {
+  .delete-notification h1, .comment-delete-notification h1 {
     font-size: 2.4rem;
   }
 
-  .delete-notification p {
+  .delete-notification p, .comment-delete-notification p {
     font-size: 1.6rem;
     margin-top: 8px;
     color: #777777;
   }
   /* Add a color to the cancel button */
-  .cancelBtn {
+  .cancelBtn, .commentCancelBtn {
     background-color: #f2f2f2;
     color: black;
     border: 0.4px solid #909090;
   }
   
-  .cancelBtn:hover {
+  .cancelBtn:hover, .commentCancelBtn:hover {
     cursor: pointer;
     background-color: #dddddd;
   }
   /* Add a color to the delete button */
-  .deletebtn {
+  .deletebtn, .commentDeletebtn {
     background-color: rgb(224, 25, 39);
     border: 1px solid rgb(224, 25, 39);
     color: #fff;
     font-weight: 600;
   }
 
-  .deletebtn:hover {
+  .deletebtn:hover, .commentDeletebtn:hover {
     cursor: pointer;
     background-color: rgb(184, 2, 11);
     border: none;
   }
   
   /* Add padding and center-align text to the container */
-  .delete-notification {
+  .delete-notification, .comment-delete-notification {
     padding: 16px;
     text-align: center;
   }
   
   /* The Modal (background) */
-  .delete-notification-modal {
+  .delete-notification-modal, .comment-delete-notification-modal {
     display: none; /* Hidden by default */
     position: absolute;
     top: 24%;

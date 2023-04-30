@@ -11,6 +11,8 @@ export default class Posts {
   deletedPostID: number | null = null;
   editedPostID: number | null = null;
 
+  deletedCommentID: number | null = null;
+
   async fetchPosts() {
     // TODO get user id from JWT
     const userId = 1;
@@ -75,7 +77,22 @@ export default class Posts {
       body: formData,
     })
       .then((result) => result.json())
-      .then((comment) => this.buildComment(comment))
+      .then((comment) => {
+        this.updateCommentCount(comment.tweetId, 1);
+        this.buildComment(comment);
+      })
+      .catch((error) => {
+        console.error(error);
+        return [];
+      });
+  }
+
+  async deleteComment(tweetId: number, commentId: number) {
+    await fetch(`${MAIN_URL}/comments/${commentId}`, {
+      method: "delete",
+    })
+      .then((result) => result.json())
+      .then(() => this.removeComment(commentId))
       .catch((error) => {
         console.error(error);
         return [];
@@ -114,6 +131,20 @@ export default class Posts {
     return deletedLikeId;
   }
 
+  updateCommentCount(tweetId: number, action: number) {
+    const commentCount = <HTMLDivElement>(
+      document.querySelector(`.post[data-id="${tweetId}"] .comment-number`)
+    );
+    commentCount.innerText = String(Number(commentCount.innerText) + action);
+  }
+
+  removeComment(commentId: number) {
+    const commentContainer = <HTMLInputElement>(
+      document.getElementById(`comment-${commentId}`)
+    );
+    commentContainer.remove();
+  }
+
   buildComment(comment: Comment) {
     const commentsContainer = <HTMLInputElement>(
       document.getElementById(`comments-${comment.tweetId}`)
@@ -146,6 +177,86 @@ export default class Posts {
     nameTag.appendChild(tagAndTimeText);
     postUserInfo.append(author, nameTag);
 
+    // three dot
+    const settings = document.createElement("div");
+    settings.classList.add("settings");
+
+    const ellipsis = document.createElement("i");
+    ellipsis.classList.add("fa-solid", "fa-ellipsis");
+    settings.appendChild(ellipsis);
+
+    const options = document.createElement("div");
+    options.classList.add("options");
+
+    const editContainer = createElement<HTMLDivElement>(
+      "div",
+      "comment-edit-container"
+    );
+    const editOption = createElement<HTMLDivElement>("div", "option-text");
+    editOption.textContent = "Edit Reply";
+    const editIcon = createElement<HTMLDivElement>("i", "fa-solid fa-gear");
+    editContainer.append(editOption, editIcon);
+
+    options.appendChild(editContainer);
+
+    const deleteContainer = createElement<HTMLDivElement>(
+      "div",
+      "comment-delete-container"
+    );
+    const deleteOption = createElement<HTMLDivElement>("div", "option-text");
+    const deleteIcon = createElement<HTMLDivElement>("i", "fa-solid fa-trash");
+    deleteOption.textContent = "Delete Reply";
+    deleteContainer.append(deleteOption, deleteIcon);
+
+    options.appendChild(deleteContainer);
+
+    settings.appendChild(options);
+    let isOptionsVisible = false;
+
+    ellipsis.addEventListener("click", () => {
+      if (isOptionsVisible) {
+        options.style.display = "none";
+        isOptionsVisible = false;
+      } else {
+        options.style.display = "block";
+        isOptionsVisible = true;
+      }
+    });
+
+    const commentDeleteWrapper = <HTMLElement>(
+      document.querySelector(".comment-delete-wrapper")
+    );
+    const commentDeleteNotificationModal = <HTMLElement>(
+      document.querySelector(".comment-delete-notification-modal")
+    );
+    deleteContainer.addEventListener("click", () => {
+      commentDeleteNotificationModal.style.display = "block";
+      options.style.display = "none";
+      commentDeleteWrapper.style.display = "block";
+      this.deletedCommentID = comment.id;
+    });
+
+    const commentCancelBtn = <HTMLElement>(
+      document.querySelector(".commentCancelBtn")
+    );
+    commentCancelBtn.addEventListener("click", () => {
+      commentDeleteNotificationModal.style.display = "none";
+      commentDeleteWrapper.style.display = "none";
+    });
+
+    const commentDeleteBtn = <HTMLElement>(
+      document.querySelector(".commentDeletebtn")
+    );
+    commentDeleteBtn.addEventListener("click", async () => {
+      if (this.deletedCommentID == comment.id) {
+        commentDeleteNotificationModal.style.display = "none";
+        commentDeleteWrapper.style.display = "none";
+        await this.deleteComment(comment.tweetId, this.deletedCommentID);
+        this.updateCommentCount(comment.tweetId, -1);
+        this.deletedCommentID = null;
+      }
+    });
+
     // content
     const postText = createElement<HTMLParagraphElement>(
       "p",
@@ -155,7 +266,7 @@ export default class Posts {
     postText.appendChild(postTextContent);
     postContent.append(postUserInfo, postText);
 
-    commentPost.append(userAvatar, postContent);
+    commentPost.append(userAvatar, postContent, settings);
 
     commentsContainer.prepend(commentPost);
   }
