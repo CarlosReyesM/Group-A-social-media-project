@@ -61,6 +61,27 @@ export default class Posts {
       });
   }
 
+  async createComment(content: string, tweetId: string) {
+    // TODO get user id from JWT
+    const userId = 1;
+
+    const formData = new FormData();
+    formData.append("userId", String(userId));
+    formData.append("tweetId", tweetId);
+    formData.append("content", content);
+
+    await fetch(`${MAIN_URL}/comments`, {
+      method: "post",
+      body: formData,
+    })
+      .then((result) => result.json())
+      .then((comment) => this.buildComment(comment))
+      .catch((error) => {
+        console.error(error);
+        return [];
+      });
+  }
+
   async giveFavorite(tweetId: number): Promise<{ id: number }> {
     const body = {
       userId: 1,
@@ -136,7 +157,52 @@ export default class Posts {
 
     commentPost.append(userAvatar, postContent);
 
-    commentsContainer.append(commentPost);
+    commentsContainer.prepend(commentPost);
+  }
+
+  buildCommentForm(post: Post): HTMLDivElement {
+    const commentPost = createElement<HTMLDivElement>(
+      "div",
+      "add-comment",
+      `add-comment-${post.tweetId}`
+    );
+    const commentInput = createElement<HTMLInputElement>(
+      "input",
+      "add-comment-input dark-mode-2 light-text border"
+    );
+    commentInput.placeholder = "Tweet your reply";
+
+    const commentPostButton = createElement<HTMLButtonElement>(
+      "button",
+      "comment-reply-button"
+    );
+    commentPostButton.type = "button";
+    commentPostButton.innerText = "Reply";
+
+    const disableButton = ({ disable } = { disable: false }) => {
+      if (disable) {
+        commentPostButton.style.opacity = String(0.5);
+        commentPostButton.style.cursor = "not-allowed";
+      } else {
+        commentPostButton.style.opacity = String(1);
+        commentPostButton.style.cursor = "pointer";
+      }
+    };
+
+    commentInput.addEventListener("input", () => {
+      const replyMessage = commentInput.value.trim();
+      disableButton({ disable: replyMessage.length == 0 });
+    });
+    commentPostButton.addEventListener("click", async () => {
+      const replyMessage = commentInput.value.trim();
+      if (replyMessage.length > 0) {
+        await this.createComment(replyMessage, post.tweetId);
+      }
+    });
+
+    commentPost.append(commentInput, commentPostButton);
+
+    return commentPost;
   }
 
   buildPost(post: Post) {
@@ -284,22 +350,28 @@ export default class Posts {
     // comment
     let commentsContainer: HTMLDivElement | null = null;
     comments.addEventListener("click", async () => {
-      if (post.commentNumber !== "0") {
-        if (!showComment) {
-          commentsContainer = createElement<HTMLDivElement>(
-            "div",
-            "comments",
-            `comments-${post.tweetId}`
-          );
-          container.append(commentsContainer);
+      if (!showComment) {
+        commentsContainer = createElement<HTMLDivElement>(
+          "div",
+          "comments-container",
+          `comments-container-${post.tweetId}`
+        );
+        container.append(commentsContainer);
+        const commentsDiv = createElement<HTMLDivElement>(
+          "div",
+          "comments",
+          `comments-${post.tweetId}`
+        );
+        const commentPostForm = this.buildCommentForm(post);
+        commentsContainer.append(commentPostForm, commentsDiv);
+        if (post.commentNumber !== "0") {
           await this.fetchComments(post.tweetId);
-        } else {
-          commentsContainer?.remove();
         }
-        showComment = !showComment;
+      } else {
+        commentsContainer?.remove();
       }
+      showComment = !showComment;
     });
-    
 
     const retweet = createElement<HTMLDivElement>("div", "retweet");
     const retweetIcon = createElement<HTMLDivElement>("i", "fas fa-retweet");
