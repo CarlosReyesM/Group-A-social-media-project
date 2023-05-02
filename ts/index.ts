@@ -35,10 +35,11 @@ const goToLoginPage = () => {
   newsFeedPage.style.display = "none";
 };
 
-const goToMainPage = () => {
+const goToMainPage = async() => {
   mainPage.style.display = "none";
   newsFeedPage.style.display = "block";
-  postsClass.fetchPosts();
+  await postsClass.fetchPosts();
+  // checkTheme();
 };
 
 const checkForCredentials = () => {
@@ -49,8 +50,29 @@ const checkForCredentials = () => {
   }
   goToLoginPage();
 }
-
 checkForCredentials();
+
+
+// const checkTheme = () => {
+//   const theme = localStorage.getItem("theme");
+//   console.log(theme)
+//   if (theme === 'dark') {
+//    //Change theme to dark mode
+//     const post1 = document.getElementsByClassName('post-user-info light-text');
+//     Array.from(post1).forEach((post) =>
+//     post.classList.toggle("light")
+//     );
+
+//     const post2 = document.getElementsByClassName('post-text light-text');
+//     Array.from(post2).forEach((post) =>
+//     post.classList.toggle("light")
+//     );
+    
+//   } else {
+//   //Change theme to light mode
+
+//   }
+// }
 
 /************************************************************ */
 // POST
@@ -175,8 +197,9 @@ xBtn.addEventListener("click", () => {
 
 const darkElements1 = document.querySelectorAll(".dark-mode-1");
 const darkElements2 = document.querySelectorAll(".dark-mode-2");
-const lightTexts = document.querySelectorAll(".light-text");
+const lightTexts = document.getElementsByClassName("light-text");
 const borders = document.querySelectorAll(".border");
+
 
 toggle.addEventListener("click", () => {
   circle.classList.toggle("move");
@@ -186,10 +209,20 @@ toggle.addEventListener("click", () => {
   Array.from(darkElements2).map((darkEl2) =>
     darkEl2.classList.toggle("dark-2")
   );
-  Array.from(lightTexts).map((lightText) =>
+  Array.from(lightTexts).forEach((lightText) =>
     lightText.classList.toggle("light")
   );
+
   Array.from(borders).map((border) => border.classList.toggle("border-color"));
+  
+  // const theme = localStorage.getItem('theme');
+  // if (theme === 'dark') {
+  //   localStorage.setItem('theme', 'light'); 
+  // } else if (theme === 'light') {
+  //   localStorage.setItem('theme' , 'dark')
+  // } else if (!theme) {
+  //   localStorage.setItem('theme', 'dark');
+  // }
 });
 
 const followBtns = document.querySelectorAll(
@@ -260,6 +293,13 @@ deleteBtns.forEach((btn) => {
 });
 
 
+const logOutBtn = <HTMLElement>document.querySelector('.log-out-btn');
 
+
+logOutBtn.addEventListener('click', () => {
+  mainPage.style.display = "grid";
+  loginPage.style.display = "none";
+  newsFeedPage.style.display = 'none';
+})
 
 
