@@ -539,6 +539,7 @@ export default class Posts {
           const postIndex = this.posts.findIndex(
             (p) => p.tweetId === post.tweetId
           );
+          console.log(postIndex);
           this.posts[postIndex].favoriteId = favoriteId.id;
           this.posts[postIndex].favoriteNumber = String(
             parseInt(this.posts[postIndex].favoriteNumber, 10) + 1
