@@ -147,6 +147,7 @@ export default class Posts {
   }
 
   buildComment(comment: Comment) {
+    const theme = localStorage.getItem("theme");
     const commentsContainer = <HTMLInputElement>(
       document.getElementById(`comments-${comment.tweetId}`)
     );
@@ -168,7 +169,7 @@ export default class Posts {
     const postContent = createElement<HTMLDivElement>("div", "post-content");
     const postUserInfo = createElement<HTMLDivElement>(
       "div",
-      "post-user-info light-text"
+      `post-user-info light-text ${theme === "dark" ? "light" : ""}`
     );
     const author = createElement<HTMLHeadingElement>("h4");
     const authorName = textNode(comment.userName);
@@ -321,6 +322,7 @@ export default class Posts {
   }
 
   buildPost(post: Post) {
+    const theme = localStorage.getItem("theme");
     const container = createElement<HTMLDivElement>("div", "post border");
     container.dataset.id = post.tweetId;
     const postContainer = createElement<HTMLDivElement>(
@@ -336,7 +338,7 @@ export default class Posts {
     const postContent = createElement<HTMLDivElement>("div", "post-content");
     const postUserInfo = createElement<HTMLDivElement>(
       "div",
-      "post-user-info light-text"
+      `post-user-info light-text ${theme === "dark" ? "light" : ""}`
     );
     const author = createElement<HTMLHeadingElement>("h4");
     const authorName = textNode(post.author);
@@ -432,7 +434,7 @@ export default class Posts {
 
     const postText = createElement<HTMLParagraphElement>(
       "p",
-      "post-text light-text"
+      `post-text light-text ${theme === "dark" ? "light" : ""}`
     );
     const postTextContent = textNode(post.content);
     postText.appendChild(postTextContent);

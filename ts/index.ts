@@ -14,8 +14,12 @@ const postBtn = <HTMLElement>document.querySelector(".post-btn");
 const modalWrapper = <HTMLElement>document.querySelector(".modal-wrapper");
 const modal = <HTMLElement>document.querySelector(".modal");
 const postModalX = <HTMLElement>document.querySelector(".modal-header i");
-const modalPostBtn = <HTMLButtonElement>(document.querySelector(".modal-header button"));
-const modalFooterPlus = <HTMLElement>(document.querySelector(".modal-footer span"));
+const modalPostBtn = <HTMLButtonElement>(
+  document.querySelector(".modal-header button")
+);
+const modalFooterPlus = <HTMLElement>(
+  document.querySelector(".modal-footer span")
+);
 const modalInput = <HTMLInputElement>document.querySelector(".modal-input");
 const user = <HTMLElement>document.querySelector(".user");
 const sidebar = <HTMLElement>document.querySelector(".sidebar");
@@ -26,20 +30,49 @@ const circle = <HTMLElement>document.querySelector(".circle");
 const passwordInput = <HTMLElement>document.getElementById("password");
 const passwordToggle = <HTMLElement>document.querySelector(".password-toggle");
 const inputPost = <HTMLInputElement>document.querySelector("#input__post");
-const modalInputImage = <HTMLInputElement>document.querySelector("#modal-post-image")
+const modalInputImage = <HTMLInputElement>(
+  document.querySelector("#modal-post-image")
+);
 
 const postsClass = new Posts();
+
+const toggleDarkMode = () => {
+  const darkElements1 = document.querySelectorAll(".dark-mode-1");
+const darkElements2 = document.querySelectorAll(".dark-mode-2");
+const lightTexts = document.getElementsByClassName("light-text");
+const borders = document.querySelectorAll(".border");
+  circle.classList.toggle("move");
+  Array.from(darkElements1).map((darkEl1) =>
+    darkEl1.classList.toggle("dark-1")
+  );
+  Array.from(darkElements2).map((darkEl2) =>
+    darkEl2.classList.toggle("dark-2")
+  );
+  Array.from(lightTexts).forEach((lightText) =>
+    lightText.classList.toggle("light")
+  );
+
+  Array.from(borders).map((border) => border.classList.toggle("border-color"));
+}
+
+const checkTheme = () => {
+  const theme = localStorage.getItem("theme");
+  if (theme === "dark") {
+    toggleDarkMode()
+  }
+};
+
+checkTheme();
 
 const goToLoginPage = () => {
   mainPage.style.display = "grid";
   newsFeedPage.style.display = "none";
 };
 
-const goToMainPage = async() => {
+const goToMainPage = () => {
   mainPage.style.display = "none";
   newsFeedPage.style.display = "block";
-  await postsClass.fetchPosts();
-  // checkTheme();
+  postsClass.fetchPosts();
 };
 
 const checkForCredentials = () => {
@@ -49,30 +82,8 @@ const checkForCredentials = () => {
     return;
   }
   goToLoginPage();
-}
+};
 checkForCredentials();
-
-
-// const checkTheme = () => {
-//   const theme = localStorage.getItem("theme");
-//   console.log(theme)
-//   if (theme === 'dark') {
-//    //Change theme to dark mode
-//     const post1 = document.getElementsByClassName('post-user-info light-text');
-//     Array.from(post1).forEach((post) =>
-//     post.classList.toggle("light")
-//     );
-
-//     const post2 = document.getElementsByClassName('post-text light-text');
-//     Array.from(post2).forEach((post) =>
-//     post.classList.toggle("light")
-//     );
-    
-//   } else {
-//   //Change theme to light mode
-
-//   }
-// }
 
 /************************************************************ */
 // POST
@@ -99,9 +110,8 @@ passwordToggle.addEventListener("click", function () {
 });
 
 const saveCredentials = () => {
-  localStorage.setItem("loggedIn", "true")
-}
-
+  localStorage.setItem("loggedIn", "true");
+};
 
 middleContent.addEventListener("click", (e) => {
   const target = e.target as HTMLDivElement;
@@ -152,7 +162,7 @@ loginFormBtn.addEventListener("click", () => {
 postBtn.addEventListener("click", () => {
   modal.style.display = "block";
   modalWrapper.classList.add("modal-wrapper-display");
-  inputPost.placeholder = "What's happening?"
+  inputPost.placeholder = "What's happening?";
   if (modalInput.value !== "") {
     modalInput.value = "";
     changeOpacity(0.5);
@@ -195,34 +205,16 @@ xBtn.addEventListener("click", () => {
 
 // dark-Mode -unfinished
 
-const darkElements1 = document.querySelectorAll(".dark-mode-1");
-const darkElements2 = document.querySelectorAll(".dark-mode-2");
-const lightTexts = document.getElementsByClassName("light-text");
-const borders = document.querySelectorAll(".border");
-
-
 toggle.addEventListener("click", () => {
-  circle.classList.toggle("move");
-  Array.from(darkElements1).map((darkEl1) =>
-    darkEl1.classList.toggle("dark-1")
-  );
-  Array.from(darkElements2).map((darkEl2) =>
-    darkEl2.classList.toggle("dark-2")
-  );
-  Array.from(lightTexts).forEach((lightText) =>
-    lightText.classList.toggle("light")
-  );
-
-  Array.from(borders).map((border) => border.classList.toggle("border-color"));
-  
-  // const theme = localStorage.getItem('theme');
-  // if (theme === 'dark') {
-  //   localStorage.setItem('theme', 'light'); 
-  // } else if (theme === 'light') {
-  //   localStorage.setItem('theme' , 'dark')
-  // } else if (!theme) {
-  //   localStorage.setItem('theme', 'dark');
-  // }
+  toggleDarkMode();
+  const theme = localStorage.getItem('theme');
+  if (theme === 'dark') {
+    localStorage.setItem('theme', 'light');
+  } else if (theme === 'light') {
+    localStorage.setItem('theme' , 'dark')
+  } else if (!theme) {
+    localStorage.setItem('theme', 'dark');
+  }
 });
 
 const followBtns = document.querySelectorAll(
@@ -255,51 +247,46 @@ for (const followBtn of followBtns) {
       followBtn.classList.remove("unfollowed");
     }
   });
-
-
-
 }
 
-const deleteBtns = document.querySelectorAll('.deletebtn');
+const deleteBtns = document.querySelectorAll(".deletebtn");
 
 deleteBtns.forEach((btn) => {
-  btn.addEventListener('click', (e: Event) => {
+  btn.addEventListener("click", (e: Event) => {
     console.log(postsClass.deletedPostID);
-    const tweetId = postsClass.deletedPostID; 
-    
+    const tweetId = postsClass.deletedPostID;
+
     fetch(`${MAIN_URL}/tweets/${tweetId}`, {
-      method: 'DELETE'
+      method: "DELETE",
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
-      }
-      
-      return response.json();
-    })
-    .then(data => {
-      const postElement = document.querySelector(`.post[data-id="${tweetId}"]`);
-      if (postElement) {
-        postElement.remove();
-        console.log(`Post with ID ${tweetId} deleted successfully`);
-      } else {
-        console.error(`Post with ID ${tweetId} not found`);
-      }
-    })
-    .catch(error => {
-      console.error('Error deleting post:', error);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        const postElement = document.querySelector(
+          `.post[data-id="${tweetId}"]`
+        );
+        if (postElement) {
+          postElement.remove();
+          console.log(`Post with ID ${tweetId} deleted successfully`);
+        } else {
+          console.error(`Post with ID ${tweetId} not found`);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting post:", error);
+      });
   });
 });
 
+const logOutBtn = <HTMLElement>document.querySelector(".log-out-btn");
 
-const logOutBtn = <HTMLElement>document.querySelector('.log-out-btn');
-
-
-logOutBtn.addEventListener('click', () => {
+logOutBtn.addEventListener("click", () => {
   mainPage.style.display = "grid";
   loginPage.style.display = "none";
-  newsFeedPage.style.display = 'none';
-})
-
-
+  newsFeedPage.style.display = "none";
+});
