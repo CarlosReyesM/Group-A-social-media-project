@@ -31,8 +31,8 @@ const modalInputImage = <HTMLInputElement>document.querySelector("#modal-post-im
 const postsClass = new Posts();
 
 const goToLoginPage = () => {
-  mainPage.style.display = "none";
-  loginPage.style.display = "grid";
+  mainPage.style.display = "grid";
+  newsFeedPage.style.display = "none";
 };
 
 const goToMainPage = () => {
