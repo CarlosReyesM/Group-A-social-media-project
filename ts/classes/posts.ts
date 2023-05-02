@@ -56,7 +56,8 @@ export default class Posts {
       body: formData,
     })
       .then((result) => result.json())
-      .then((post) => this.renderPost(post))
+      .then((post) => {this.posts.push(post[0]); return post})
+      .then((post) => {this.renderPost(post)})
       .catch((error) => {
         console.error(error);
         return [];
