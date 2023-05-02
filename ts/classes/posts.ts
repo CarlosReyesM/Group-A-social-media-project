@@ -56,7 +56,8 @@ export default class Posts {
       body: formData,
     })
       .then((result) => result.json())
-      .then((post) => this.renderPost(post))
+      .then((post) => {this.posts.push(post[0]); return post})
+      .then((post) => {this.renderPost(post)})
       .catch((error) => {
         console.error(error);
         return [];
@@ -538,6 +539,7 @@ export default class Posts {
           const postIndex = this.posts.findIndex(
             (p) => p.tweetId === post.tweetId
           );
+          console.log(postIndex);
           this.posts[postIndex].favoriteId = favoriteId.id;
           this.posts[postIndex].favoriteNumber = String(
             parseInt(this.posts[postIndex].favoriteNumber, 10) + 1
