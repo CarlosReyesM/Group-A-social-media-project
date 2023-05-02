@@ -38,9 +38,9 @@ const postsClass = new Posts();
 
 const toggleDarkMode = () => {
   const darkElements1 = document.querySelectorAll(".dark-mode-1");
-const darkElements2 = document.querySelectorAll(".dark-mode-2");
-const lightTexts = document.getElementsByClassName("light-text");
-const borders = document.querySelectorAll(".border");
+  const darkElements2 = document.querySelectorAll(".dark-mode-2");
+  const lightTexts = document.getElementsByClassName("light-text");
+  const borders = document.querySelectorAll(".border");
   circle.classList.toggle("move");
   Array.from(darkElements1).map((darkEl1) =>
     darkEl1.classList.toggle("dark-1")
@@ -53,12 +53,12 @@ const borders = document.querySelectorAll(".border");
   );
 
   Array.from(borders).map((border) => border.classList.toggle("border-color"));
-}
+};
 
 const checkTheme = () => {
   const theme = localStorage.getItem("theme");
   if (theme === "dark") {
-    toggleDarkMode()
+    toggleDarkMode();
   }
 };
 
@@ -207,13 +207,13 @@ xBtn.addEventListener("click", () => {
 
 toggle.addEventListener("click", () => {
   toggleDarkMode();
-  const theme = localStorage.getItem('theme');
-  if (theme === 'dark') {
-    localStorage.setItem('theme', 'light');
-  } else if (theme === 'light') {
-    localStorage.setItem('theme' , 'dark')
+  const theme = localStorage.getItem("theme");
+  if (theme === "dark") {
+    localStorage.setItem("theme", "light");
+  } else if (theme === "light") {
+    localStorage.setItem("theme", "dark");
   } else if (!theme) {
-    localStorage.setItem('theme', 'dark');
+    localStorage.setItem("theme", "dark");
   }
 });
 

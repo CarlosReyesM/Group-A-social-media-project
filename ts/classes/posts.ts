@@ -154,7 +154,7 @@ export default class Posts {
 
     const commentPost = createElement<HTMLDivElement>(
       "div",
-      "comment-post",
+      `comment-post dark-mode-1 ${theme === "dark" ? "dark-2" : ""}`,
       `comment-${comment.id}`
     );
 
@@ -262,7 +262,7 @@ export default class Posts {
     // content
     const postText = createElement<HTMLParagraphElement>(
       "p",
-      "post-text light-text"
+      `post-text light-text ${theme === "dark" ? "light" : ""}`
     );
     const postTextContent = textNode(comment.content);
     postText.appendChild(postTextContent);

@@ -167,15 +167,15 @@ xBtn.addEventListener("click", () => {
 // dark-Mode -unfinished
 toggle.addEventListener("click", () => {
     toggleDarkMode();
-    const theme = localStorage.getItem('theme');
-    if (theme === 'dark') {
-        localStorage.setItem('theme', 'light');
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+        localStorage.setItem("theme", "light");
     }
-    else if (theme === 'light') {
-        localStorage.setItem('theme', 'dark');
+    else if (theme === "light") {
+        localStorage.setItem("theme", "dark");
     }
     else if (!theme) {
-        localStorage.setItem('theme', 'dark');
+        localStorage.setItem("theme", "dark");
     }
 });
 const followBtns = document.querySelectorAll(".follow-btn");
