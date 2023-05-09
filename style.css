@@ -1682,6 +1682,9 @@ body {
     
   }
 
+  .settings i:first-child {
+    color: rgb(26, 161, 245);
+  }
   
 
   .options {
