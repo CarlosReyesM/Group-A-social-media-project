@@ -7,7 +7,7 @@
   "name": "group-a-social-media-project-3",
   "description": "OAMK project for social media app",
   "version": "1.0.0",
-  "main": "script.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "devStart": "npx tsc --watch -p tsconfig.json",
